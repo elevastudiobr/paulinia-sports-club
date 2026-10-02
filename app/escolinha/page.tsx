@@ -1,6 +1,6 @@
 import Hero from "@/components/escolinha/Hero";
 import About from "@/components/escolinha/About";
-import Competitions from "@/components/escolinha/Competitions";
+import Gallery from "@/components/escolinha/Gallery";
 import FinalCTA from "@/components/escolinha/FinalCTA";
 
 export default function EscolinhaPage() {
@@ -8,7 +8,7 @@ export default function EscolinhaPage() {
     <main className="bg-[#050817] text-white">
       <Hero />
       <About />
-      <Competitions />
+      <Gallery />
       <FinalCTA />
     </main>
   );

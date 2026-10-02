@@ -10,7 +10,7 @@ export default function Space() {
       {/* Background */}
       <div className="absolute inset-0">
         <Image
-          src="/images/home/quadras/background-1.png"
+          src="/images/home/quadras/background-1.webp"
           alt=""
           fill
           sizes="100vw"
@@ -60,7 +60,7 @@ export default function Space() {
           {/* Imagem principal */}
           <div className="group relative min-h-[480px] overflow-hidden rounded-3xl border border-white/15 sm:min-h-[620px]">
             <Image
-              src="/images/home/quadras/quadra-1.jpg"
+              src="/images/home/quadras/quadra-1.webp"
               alt="Visão geral das quadras do Paulínia Sports Club"
               fill
               sizes="(max-width: 1024px) 100vw, 60vw"
@@ -86,7 +86,7 @@ export default function Space() {
             {/* Quadra descoberta */}
             <div className="group relative min-h-[300px] overflow-hidden rounded-3xl border border-white/15 sm:min-h-[340px] lg:h-[calc(50%-10px)]">
               <Image
-                src="/images/home/quadras/quadra-2.jpg"
+                src="/images/home/quadras/quadra-2.webp"
                 alt="Quadra descoberta do Paulínia Sports Club"
                 fill
                 sizes="(max-width: 1024px) 50vw, 40vw"
@@ -109,7 +109,7 @@ export default function Space() {
             {/* Quadra coberta */}
             <div className="group relative min-h-[300px] overflow-hidden rounded-3xl border border-white/15 sm:min-h-[340px] lg:h-[calc(50%-10px)]">
               <Image
-                src="/images/home/quadras/quadra-3.jpg"
+                src="/images/home/quadras/quadra-3.webp"
                 alt="Quadra coberta do Paulínia Sports Club"
                 fill
                 sizes="(max-width: 1024px) 50vw, 40vw"

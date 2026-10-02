@@ -2,7 +2,6 @@ import Hero from "@/components/home/Hero";
 import Space from "@/components/home/Space";
 import Booking from "@/components/home/Booking";
 import Structure from "@/components/home/Structure";
-import Experience from "@/components/home/Experience";
 import Gallery from "@/components/home/Gallery";
 import FinalCTA from "@/components/home/FinalCTA";
 
@@ -13,7 +12,6 @@ export default function Home() {
       <Space />
       <Booking />
       <Structure />
-      <Experience />
       <Gallery />
       <FinalCTA />
     </main>

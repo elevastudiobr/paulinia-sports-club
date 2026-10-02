@@ -1,67 +1,52 @@
 import Image from "next/image";
-import {
-  Camera,
-  Armchair,
-  Shirt,
-  Flame,
-  Coffee,
-  CarFront,
-  ArrowUpRight,
-} from "lucide-react";
 
 const features = [
   {
-    icon: Camera,
     number: "01",
     title: "Câmeras",
     description:
       "Registre gols, jogadas e os melhores momentos da sua partida.",
-    image: "/images/home/estrutura/cameras.png",
+    image: "/images/home/estrutura/cameras.webp",
     large: true,
   },
   {
-    icon: Armchair,
     number: "02",
     title: "Banco de reserva",
     description:
       "Mais organização e conforto para quem está esperando a próxima partida.",
-    image: "/images/home/estrutura/banco.png",
+    image: "/images/home/estrutura/banco.webp",
     large: true,
   },
   {
-    icon: Shirt,
     number: "03",
     title: "Vestiários",
     description:
       "Espaço para se preparar antes e depois do jogo.",
-    image: "/images/home/estrutura/vestiarios.png",
+    image: "/images/home/estrutura/vestiarios.webp",
     large: false,
   },
   {
-    icon: Flame,
     number: "04",
     title: "Churrasqueira",
     description:
       "Depois do jogo, a resenha continua em um espaço preparado para isso.",
-    image: "/images/home/estrutura/churrasqueira.png",
+    image: "/images/home/estrutura/churrasqueira.webp",
     large: false,
   },
   {
-    icon: Coffee,
     number: "05",
     title: "Lanchonete",
     description:
       "Tenha praticidade para aproveitar o espaço sem precisar sair.",
-    image: "/images/home/estrutura/lanchonete.png",
+    image: "/images/home/estrutura/lanchonete.webp",
     large: false,
   },
   {
-    icon: CarFront,
     number: "06",
     title: "Estacionamento",
     description:
       "Mais de 50 vagas para você chegar, jogar e aproveitar o espaço com tranquilidade.",
-    image: "/images/home/estrutura/estacionamento.png",
+    image: "/images/home/estrutura/estacionamento.webp",
     large: false,
   },
 ];
@@ -70,56 +55,84 @@ export default function Structure() {
   return (
     <section
       id="estrutura"
-      className="relative overflow-hidden bg-[#06120d] py-24 sm:py-32 lg:py-40"
+      className="relative overflow-hidden bg-[#07100b] py-24 sm:py-32 lg:py-40"
     >
-      {/* =====================================================
-          BACKGROUND
-      ====================================================== */}
+      {/* ========================================================= */}
+      {/* BACKGROUND */}
+      {/* ========================================================= */}
 
-      {/* Verde claro principal */}
-      <div className="pointer-events-none absolute -left-[18%] -top-[15%] h-[850px] w-[850px] rounded-full bg-emerald-400/[0.18] blur-[190px]" />
+      <div className="absolute inset-0">
+        {/* IMAGEM PRINCIPAL DO BACKGROUND */}
+        <Image
+          src="/images/home/galeria/img-7.webp"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="scale-105 object-cover blur-[2px]"
+        />
 
-      {/* Verde médio */}
-      <div className="pointer-events-none absolute left-[35%] top-[15%] h-[650px] w-[650px] rounded-full bg-emerald-500/[0.10] blur-[180px]" />
+        {/* Escurecimento leve */}
+        <div className="absolute inset-0 bg-black/25" />
 
-      {/* Verde escuro */}
-      <div className="pointer-events-none absolute -right-[20%] bottom-[-10%] h-[850px] w-[850px] rounded-full bg-green-950/[0.85] blur-[100px]" />
+        {/* ===================================================== */}
+        {/* GRADIENTE VERDE DE TRANSIÇÃO — TOPO */}
+        {/* ===================================================== */}
 
-      {/* Gradient principal */}
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,#123f2b_0%,#0b291d_30%,#06170f_65%,#020906_100%)]" />
+        <div className="absolute inset-x-0 top-0 h-[420px] bg-gradient-to-b from-[#0d3825] via-[#164d32]/65 to-transparent" />
 
-      {/* Luz verde atravessando o fundo */}
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(115deg,rgba(52,211,153,0.16)_0%,transparent_38%,rgba(6,78,59,0.16)_72%,transparent_100%)]" />
+        <div className="absolute inset-x-0 top-0 h-[650px] bg-gradient-to-b from-[#0d3825]/55 via-[#0b2d1b]/20 to-transparent" />
 
-      {/* Glow central */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_35%_20%,rgba(74,222,128,0.14),transparent_38%)]" />
+        {/* Verde lateral */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#06150c]/55 via-transparent to-[#06150c]/50" />
 
-      {/* Escurecimento inferior */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#020906]/45 via-transparent to-transparent" />
+        {/* ===================================================== */}
+        {/* GRADIENTE INFERIOR */}
+        {/* ===================================================== */}
 
-      {/* Textura sutil */}
-      <div className="pointer-events-none absolute inset-0 opacity-[0.08] [background-image:linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:80px_80px]" />
+        <div className="absolute inset-x-0 bottom-0 h-[420px] bg-gradient-to-t from-[#07100b] via-[#07100b]/55 to-transparent" />
 
-      {/* =====================================================
-          CONTEÚDO
-      ====================================================== */}
+        {/* ===================================================== */}
+        {/* BRILHOS VERDES */}
+        {/* ===================================================== */}
+
+        <div className="pointer-events-none absolute -left-[15%] top-[5%] h-[600px] w-[600px] rounded-full bg-emerald-500/[0.16] blur-[170px]" />
+
+        <div className="pointer-events-none absolute -right-[15%] top-[18%] h-[650px] w-[650px] rounded-full bg-green-500/[0.12] blur-[180px]" />
+
+        <div className="pointer-events-none absolute left-[28%] top-[35%] h-[600px] w-[700px] rounded-full bg-emerald-400/[0.07] blur-[180px]" />
+
+        <div className="pointer-events-none absolute -left-[15%] bottom-[-10%] h-[600px] w-[600px] rounded-full bg-emerald-600/[0.14] blur-[170px]" />
+
+        <div className="pointer-events-none absolute -right-[10%] bottom-[-5%] h-[650px] w-[650px] rounded-full bg-green-500/[0.12] blur-[175px]" />
+
+        {/* ===================================================== */}
+        {/* VINHETA */}
+        {/* ===================================================== */}
+
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,rgba(2,8,5,0.38)_100%)]" />
+
+        {/* Textura discreta */}
+        <div className="pointer-events-none absolute inset-0 opacity-[0.025] [background-image:linear-gradient(rgba(255,255,255,0.5)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.5)_1px,transparent_1px)] [background-size:100px_100px]" />
+      </div>
+
+      {/* ========================================================= */}
+      {/* CONTEÚDO */}
+      {/* ========================================================= */}
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
-
-        {/* =====================================================
-            CABEÇALHO
-        ====================================================== */}
+        {/* CABEÇALHO */}
 
         <div className="mb-14 max-w-3xl sm:mb-16">
           <div className="mb-6 flex items-center gap-3">
-            <span className="h-px w-10 bg-emerald-300/80" />
+            <span className="h-px w-10 bg-emerald-300/70" />
 
-            <span className="text-xs font-medium uppercase tracking-[0.28em] text-emerald-200/75">
+            <span className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-200/80">
               Estrutura
             </span>
           </div>
 
-          <h2 className="text-4xl font-medium leading-[1.02] tracking-[-0.04em] text-white sm:text-5xl lg:text-7xl">
+          <h2 className="text-4xl font-semibold leading-[1.02] tracking-[-0.04em] text-white sm:text-5xl lg:text-7xl">
             Tudo para você
             <br />
             <span className="text-white/55">
@@ -127,188 +140,129 @@ export default function Structure() {
             </span>
           </h2>
 
-          <p className="mt-7 max-w-2xl text-base leading-7 text-white/60 sm:text-lg">
+          <p className="mt-7 max-w-2xl text-base font-medium leading-7 text-white/65 sm:text-lg">
             Uma estrutura completa para que você aproveite cada momento,
             desde a chegada até depois da partida.
           </p>
         </div>
 
-        {/* =====================================================
-            CARDS PRINCIPAIS
-        ====================================================== */}
+        {/* ===================================================== */}
+        {/* CARDS GRANDES */}
+        {/* ===================================================== */}
 
-        <div className="grid gap-5 lg:grid-cols-2">
+        <div className="grid gap-6 lg:grid-cols-2">
           {features
             .filter((feature) => feature.large)
-            .map((feature) => {
-              const Icon = feature.icon;
+            .map((feature) => (
+              <div
+                key={feature.number}
+                className="group relative min-h-[500px] overflow-hidden rounded-[30px] border border-white/15 bg-[#10261b]/70 shadow-[0_25px_80px_rgba(0,0,0,0.30)] backdrop-blur-sm transition-all duration-700 hover:-translate-y-1 hover:border-white/25 hover:shadow-[0_30px_90px_rgba(0,0,0,0.40)] sm:min-h-[530px]"
+              >
+                <div className="absolute inset-0">
+                  <Image
+                    src={feature.image}
+                    alt={feature.title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover opacity-[0.88] transition-all duration-700 group-hover:scale-[1.045] group-hover:opacity-95"
+                  />
+                </div>
 
-              return (
-                <div
-                  key={feature.number}
-                  className="group relative min-h-[500px] overflow-hidden rounded-[28px] border border-white/10 bg-[#07100d] transition-all duration-500 hover:border-emerald-400/30"
-                >
-                  {/* Imagem */}
-                  <div className="absolute inset-0">
-                    <Image
-                      src={feature.image}
-                      alt={feature.title}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                    />
-                  </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#06130c]/85 via-[#06130c]/25 to-transparent" />
 
-                  {/* Overlay da imagem */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/5" />
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-300/[0.10] via-transparent to-[#03150c]/20" />
 
-                  {/* Verde sutil */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/[0.06] via-transparent to-transparent" />
+                <div className="pointer-events-none absolute inset-[1px] rounded-[29px] border border-white/[0.10]" />
 
-                  {/* Número */}
-                  <span className="absolute right-7 top-4 text-[120px] font-medium leading-none tracking-[-0.09em] text-white/[0.08] sm:right-10 sm:text-[150px]">
-                    {feature.number}
-                  </span>
+                <span className="absolute right-8 top-5 text-[120px] font-medium leading-none tracking-[-0.10em] text-white/[0.11] transition-all duration-500 group-hover:text-white/[0.16] sm:right-10 sm:text-[150px]">
+                  {feature.number}
+                </span>
 
-                  {/* Conteúdo */}
-                  <div className="relative flex min-h-[500px] flex-col justify-end p-8 sm:p-10">
+                <div className="relative flex min-h-[500px] flex-col justify-end p-8 sm:min-h-[530px] sm:p-10">
+                  <div className="max-w-xl">
+                    <div className="mb-5 h-px w-10 bg-white/45 transition-all duration-500 group-hover:w-16 group-hover:bg-emerald-300/80" />
 
-                    {/* Ícone */}
-                    <div className="mb-7 flex h-12 w-12 items-center justify-center rounded-full border border-white/25 bg-black/20 backdrop-blur-md">
-                      <Icon
-                        size={21}
-                        strokeWidth={1.7}
-                        className="text-white"
-                      />
-                    </div>
-
-                    {/* Título */}
-                    <h3 className="text-3xl font-medium tracking-tight text-white sm:text-4xl">
+                    <h3 className="text-3xl font-medium leading-tight tracking-[-0.025em] text-white sm:text-4xl">
                       {feature.title}
                     </h3>
 
-                    {/* Descrição */}
-                    <p className="mt-4 max-w-md text-sm leading-7 text-white/75 sm:text-base">
+                    <p className="mt-4 max-w-lg text-sm leading-7 text-white/75 sm:text-base">
                       {feature.description}
                     </p>
-
-                    {/* Rodapé */}
-                    <div className="mt-7 flex items-center justify-between border-t border-white/20 pt-5">
-                      <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/55">
-                        Paulínia Sports Club
-                      </span>
-
-                      <div className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/20 backdrop-blur-md transition-all duration-300 group-hover:border-emerald-300/40 group-hover:bg-emerald-400/10">
-                        <ArrowUpRight
-                          size={17}
-                          strokeWidth={1.6}
-                          className="text-white/70 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-emerald-300"
-                        />
-                      </div>
-                    </div>
                   </div>
                 </div>
-              );
-            })}
+              </div>
+            ))}
         </div>
 
-        {/* =====================================================
-            CARDS SECUNDÁRIOS
-        ====================================================== */}
+        {/* ===================================================== */}
+        {/* CARDS PEQUENOS */}
+        {/* ===================================================== */}
 
-        <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {features
             .filter((feature) => !feature.large)
-            .map((feature) => {
-              const Icon = feature.icon;
+            .map((feature) => (
+              <div
+                key={feature.number}
+                className="group relative min-h-[370px] overflow-hidden rounded-[28px] border border-white/15 bg-[#10261b]/70 shadow-[0_20px_60px_rgba(0,0,0,0.25)] backdrop-blur-sm transition-all duration-700 hover:-translate-y-1 hover:border-white/25 hover:shadow-[0_25px_70px_rgba(0,0,0,0.35)]"
+              >
+                <div className="absolute inset-0">
+                  <Image
+                    src={feature.image}
+                    alt={feature.title}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    className="object-cover opacity-[0.86] transition-all duration-700 group-hover:scale-[1.06] group-hover:opacity-95"
+                  />
+                </div>
 
-              return (
-                <div
-                  key={feature.number}
-                  className="group relative min-h-[390px] overflow-hidden rounded-[26px] border border-white/10 bg-[#07100d] transition-all duration-500 hover:border-emerald-400/30"
-                >
-                  {/* Imagem */}
-                  <div className="absolute inset-0">
-                    <Image
-                      src={feature.image}
-                      alt={feature.title}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
-                    />
-                  </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#06130c]/90 via-[#06130c]/35 to-[#06130c]/5" />
 
-                  {/* Overlay da imagem */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/10" />
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-300/[0.08] via-transparent to-[#03150c]/15" />
 
-                  {/* Verde sutil */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/[0.06] via-transparent to-transparent" />
+                <div className="pointer-events-none absolute inset-[1px] rounded-[27px] border border-white/[0.10]" />
 
-                  {/* Número */}
-                  <span className="absolute right-5 top-2 text-7xl font-medium leading-none tracking-[-0.08em] text-white/[0.08]">
-                    {feature.number}
-                  </span>
+                <span className="absolute right-5 top-3 text-7xl font-medium leading-none tracking-[-0.09em] text-white/[0.11] transition-all duration-500 group-hover:text-white/[0.16]">
+                  {feature.number}
+                </span>
 
-                  {/* Conteúdo */}
-                  <div className="relative flex min-h-[390px] flex-col justify-end p-7 sm:p-8">
+                <div className="relative flex min-h-[370px] flex-col justify-end p-7 sm:p-8">
+                  <div className="max-w-sm">
+                    <div className="mb-4 h-px w-8 bg-white/40 transition-all duration-500 group-hover:w-14 group-hover:bg-emerald-300/80" />
 
-                    {/* Ícone */}
-                    <div className="mb-6 flex h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-black/20 backdrop-blur-md transition-all duration-300 group-hover:border-emerald-300/30 group-hover:bg-emerald-400/10">
-                      <Icon
-                        size={19}
-                        strokeWidth={1.7}
-                        className="text-white transition-colors duration-300 group-hover:text-emerald-300"
-                      />
-                    </div>
-
-                    {/* Título */}
-                    <h3 className="text-xl font-medium tracking-tight text-white">
+                    <h3 className="text-xl font-medium leading-tight tracking-[-0.015em] text-white sm:text-[22px]">
                       {feature.title}
                     </h3>
 
-                    {/* Descrição */}
                     <p className="mt-3 text-sm leading-6 text-white/70">
                       {feature.description}
                     </p>
-
-                    {/* Indicador */}
-                    <div className="mt-6 flex items-center gap-2">
-                      <span className="h-px w-6 bg-emerald-400/60 transition-all duration-300 group-hover:w-10" />
-
-                      <span className="text-[9px] uppercase tracking-[0.18em] text-white/45">
-                        Estrutura
-                      </span>
-                    </div>
                   </div>
                 </div>
-              );
-            })}
+              </div>
+            ))}
         </div>
 
-        {/* =====================================================
-            FINAL
-        ====================================================== */}
+        {/* ===================================================== */}
+        {/* TEXTO FINAL */}
+        {/* ===================================================== */}
 
-        <div className="mt-16 border-t border-white/[0.10] pt-8">
-          <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-
-            <p className="max-w-xl text-sm leading-6 text-white/40">
-              Cada detalhe foi pensado para tornar sua experiência melhor
-              antes, durante e depois da partida.
-            </p>
-
-            <div className="flex items-center gap-3">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.7)]" />
-
-              <span className="text-xs font-medium uppercase tracking-[0.18em] text-white/45">
-                Estrutura completa
-              </span>
-            </div>
-
-          </div>
+        <div className="mt-16 border-t border-white/10 pt-8">
+          <p className="max-w-xl text-sm font-medium leading-6 text-white/45">
+            Cada detalhe foi pensado para tornar sua experiência melhor
+            antes, durante e depois da partida.
+          </p>
         </div>
-
       </div>
+
+      {/* ========================================================= */}
+      {/* TRANSIÇÃO FINAL */}
+      {/* ========================================================= */}
+
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-[280px] bg-gradient-to-b from-transparent via-[#102c1c]/25 to-[#07100b]" />
+
+      <div className="pointer-events-none absolute bottom-[-100px] left-1/2 z-20 h-[400px] w-[900px] -translate-x-1/2 rounded-full bg-emerald-900/[0.18] blur-[150px]" />
     </section>
   );
 }
