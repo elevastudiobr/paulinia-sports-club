@@ -101,19 +101,20 @@ export default function Navbar() {
       <nav
         className={`border-b transition-all duration-500 ${
           scrolled
-            ? "border-white/10 bg-black/20 backdrop-blur-xl"
+            ? "border-white/10 bg-black/25 backdrop-blur-xl"
             : "border-transparent bg-transparent backdrop-blur-0"
         }`}
       >
-        <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-10">
+        {/* BARRA PRINCIPAL */}
+        <div className="mx-auto flex h-[68px] max-w-7xl items-center justify-between px-4 sm:h-[76px] sm:px-8 lg:px-10">
           {/* LOGO */}
           <button
             type="button"
             onClick={goToHome}
             aria-label="Voltar para o início"
-            className="flex items-center"
+            className="flex shrink-0 items-center"
           >
-            <div className="relative h-16 w-[72px] shrink-0 sm:h-[72px] sm:w-20">
+            <div className="relative h-[52px] w-[58px] sm:h-16 sm:w-[72px]">
               <Image
                 src="/images/logo.webp"
                 alt="Paulínia Sports Club"
@@ -123,7 +124,7 @@ export default function Navbar() {
               />
             </div>
 
-            <div className="relative ml-0 h-11 w-52 sm:ml-1 sm:h-12 sm:w-60">
+            <div className="relative ml-0 hidden h-11 w-52 sm:ml-1 sm:block sm:h-12 sm:w-60">
               <Image
                 src="/images/logo-text.webp"
                 alt="Paulínia Sports Club"
@@ -137,7 +138,6 @@ export default function Navbar() {
           {/* DESKTOP */}
           <div className="hidden items-center lg:flex">
             <div className="flex items-center gap-14">
-              {/* INÍCIO */}
               <button
                 type="button"
                 onClick={goToHome}
@@ -146,7 +146,6 @@ export default function Navbar() {
                 Início
               </button>
 
-              {/* LINKS DA HOME */}
               {navItems.map((item) => (
                 <button
                   key={item.id}
@@ -158,7 +157,6 @@ export default function Navbar() {
                 </button>
               ))}
 
-              {/* ESCOLA */}
               <button
                 type="button"
                 onClick={goToSchool}
@@ -168,7 +166,6 @@ export default function Navbar() {
               </button>
             </div>
 
-            {/* CTA */}
             <a
               href={whatsappUrl}
               target="_blank"
@@ -181,20 +178,13 @@ export default function Navbar() {
           </div>
 
           {/* MOBILE */}
-          <div className="flex items-center gap-3 lg:hidden">
-            <button
-              type="button"
-              onClick={goToSchool}
-              className="text-xs font-medium text-white/70 transition-colors duration-200 hover:text-white"
-            >
-              Escola Oficial SPFC
-            </button>
-
+          <div className="flex items-center lg:hidden">
             <button
               type="button"
               aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+              aria-expanded={menuOpen}
               onClick={() => setMenuOpen((current) => !current)}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white backdrop-blur-md transition-colors hover:bg-white/10"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/20 text-white backdrop-blur-md transition-all duration-200 hover:border-white/25 hover:bg-white/10"
             >
               {menuOpen ? <X size={19} /> : <Menu size={20} />}
             </button>
@@ -202,53 +192,57 @@ export default function Navbar() {
         </div>
 
         {/* MENU MOBILE */}
-        {menuOpen && (
-          <div className="border-t border-white/10 bg-[#050817]/90 px-5 py-5 backdrop-blur-2xl lg:hidden">
-            <div className="mx-auto max-w-7xl">
-              {/* INÍCIO */}
+        <div
+          className={`overflow-hidden border-t border-white/10 bg-[#050817]/95 backdrop-blur-2xl transition-all duration-300 lg:hidden ${
+            menuOpen
+              ? "max-h-[520px] opacity-100"
+              : "max-h-0 border-t-transparent opacity-0"
+          }`}
+        >
+          <div className="mx-auto max-w-7xl px-4 pb-5 sm:px-8">
+            {/* INÍCIO */}
+            <button
+              type="button"
+              onClick={goToHome}
+              className="flex w-full items-center border-b border-white/10 py-4 text-left text-sm font-medium text-white/75 transition-colors hover:text-white"
+            >
+              Início
+            </button>
+
+            {/* LOCAÇÃO */}
+            {navItems.map((item) => (
               <button
+                key={item.id}
                 type="button"
-                onClick={goToHome}
-                className="block w-full border-b border-white/10 py-4 text-left text-sm font-medium text-white/70 transition-colors hover:text-white"
+                onClick={() => goToSection(item.id)}
+                className="flex w-full items-center border-b border-white/10 py-4 text-left text-sm font-medium text-white/75 transition-colors hover:text-white"
               >
-                Início
+                {item.label}
               </button>
+            ))}
 
-              {/* LINKS DA HOME */}
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => goToSection(item.id)}
-                  className="block w-full border-b border-white/10 py-4 text-left text-sm font-medium text-white/70 transition-colors hover:text-white"
-                >
-                  {item.label}
-                </button>
-              ))}
+            {/* ESCOLA */}
+            <button
+              type="button"
+              onClick={goToSchool}
+              className="flex w-full items-center border-b border-white/10 py-4 text-left text-sm font-medium text-white/75 transition-colors hover:text-white"
+            >
+              Escola Oficial SPFC
+            </button>
 
-              {/* ESCOLA */}
-              <button
-                type="button"
-                onClick={goToSchool}
-                className="block w-full border-b border-white/10 py-4 text-left text-sm font-medium text-white/70 transition-colors hover:text-white"
-              >
-                Escola Oficial SPFC
-              </button>
-
-              {/* CTA */}
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setMenuOpen(false)}
-                className="mt-5 flex items-center justify-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-black"
-              >
-                <CalendarDays size={17} />
-                {whatsappLabel}
-              </a>
-            </div>
+            {/* CTA */}
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMenuOpen(false)}
+              className="mt-5 flex items-center justify-center gap-2 rounded-full bg-white px-5 py-3.5 text-sm font-semibold text-black shadow-lg shadow-black/10 transition-all duration-200 hover:bg-white/90"
+            >
+              <CalendarDays size={17} strokeWidth={2} />
+              {whatsappLabel}
+            </a>
           </div>
-        )}
+        </div>
       </nav>
     </header>
   );

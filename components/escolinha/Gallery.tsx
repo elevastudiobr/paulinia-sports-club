@@ -104,7 +104,8 @@ export default function Gallery() {
   const trackRef = useRef<HTMLDivElement>(null);
 
   const positionRef = useRef(0);
-  const velocityRef = useRef(-0.42);
+
+  const velocityRef = useRef(-5.0);
 
   const draggingRef = useRef(false);
   const startXRef = useRef(0);
@@ -116,6 +117,17 @@ export default function Gallery() {
     const track = trackRef.current;
 
     if (!track) return;
+
+    const updateVelocity = () => {
+      const isMobile = window.innerWidth < 640;
+
+      // Movimento muito mais rápido no mobile
+      velocityRef.current = isMobile ? -5.0 : -0.42;
+    };
+
+    updateVelocity();
+
+    window.addEventListener("resize", updateVelocity);
 
     const animate = () => {
       if (!draggingRef.current) {
@@ -140,6 +152,8 @@ export default function Gallery() {
     animationRef.current = requestAnimationFrame(animate);
 
     return () => {
+      window.removeEventListener("resize", updateVelocity);
+
       if (animationRef.current !== null) {
         cancelAnimationFrame(animationRef.current);
       }
@@ -238,10 +252,10 @@ export default function Gallery() {
       </div>
 
       {/* MURAL */}
-      <div className="relative z-10 mt-14 h-[570px] w-full overflow-hidden sm:mt-16 sm:h-[600px]">
+      <div className="relative z-10 mt-12 h-[410px] w-full overflow-hidden sm:mt-16 sm:h-[600px]">
         <div
           ref={trackRef}
-          className="absolute left-0 top-0 flex w-max select-none gap-2 pl-3 sm:gap-3 sm:pl-5 lg:gap-4 lg:pl-6"
+          className="absolute left-0 top-0 flex w-max select-none gap-2 pl-2 sm:gap-3 sm:pl-5 lg:gap-4 lg:pl-6"
           style={{
             touchAction: "pan-y",
             willChange: "transform",
@@ -264,12 +278,12 @@ export default function Gallery() {
               key={`${item.image}-${index}`}
               className="relative shrink-0"
               style={{
-                width: `clamp(${Math.round(item.width * 0.62)}px, ${item.width}px, ${item.width}px)`,
-                height: `clamp(${Math.round(item.height * 0.62)}px, ${item.height}px, ${item.height}px)`,
-                marginTop: `${item.top}px`,
+                width: `clamp(${Math.round(item.width * 0.78)}px, ${item.width}px, ${item.width}px)`,
+                height: `clamp(${Math.round(item.height * 0.78)}px, ${item.height}px, ${item.height}px)`,
+                marginTop: `${item.top * 0.72}px`,
               }}
             >
-              <div className="group relative h-full w-full overflow-hidden rounded-[22px] border border-white/[0.12] bg-white/5 shadow-[0_25px_80px_rgba(0,0,0,0.40)]">
+              <div className="group relative h-full w-full overflow-hidden rounded-[18px] border border-white/[0.12] bg-white/5 shadow-[0_20px_60px_rgba(0,0,0,0.40)] sm:rounded-[22px] sm:shadow-[0_25px_80px_rgba(0,0,0,0.40)]">
                 <Image
                   src={item.image}
                   alt="Momentos da Escola Oficial São Paulo FC"
@@ -281,7 +295,7 @@ export default function Gallery() {
 
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
 
-                <div className="pointer-events-none absolute inset-0 rounded-[22px] border border-white/[0.05]" />
+                <div className="pointer-events-none absolute inset-0 rounded-[18px] border border-white/[0.05] sm:rounded-[22px]" />
               </div>
             </div>
           ))}
@@ -289,18 +303,24 @@ export default function Gallery() {
       </div>
 
       {/* INDICADOR */}
-      <div className="relative z-10 mx-auto mt-4 flex max-w-7xl items-center justify-between px-6 sm:mt-6 sm:px-8 lg:px-10">
-        <div className="flex items-center gap-3">
-          <span className="h-px w-8 bg-red-600/70" />
+      <div className="relative z-10 mx-auto mt-1 max-w-7xl px-6 sm:mt-2 sm:px-8 lg:px-10">
+        <div className="flex items-center justify-between border-t border-white/[0.10] pt-4 sm:pt-5">
+          <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
+            <span className="h-px w-5 shrink-0 bg-red-600/80 sm:w-8" />
 
-          <span className="text-[10px] font-medium uppercase tracking-[0.25em] text-white/30">
-            Momentos da escola
-          </span>
+            <span className="truncate text-[9px] font-medium uppercase tracking-[0.20em] text-white/40 sm:text-[10px] sm:tracking-[0.25em]">
+              Momentos da escola
+            </span>
+          </div>
+
+          <div className="ml-4 flex shrink-0 items-center gap-2">
+            <span className="hidden h-px w-4 bg-white/15 sm:block" />
+
+            <span className="text-[8px] font-medium uppercase tracking-[0.18em] text-white/25 sm:text-[10px] sm:tracking-[0.25em]">
+              Arraste para explorar
+            </span>
+          </div>
         </div>
-
-        <span className="text-[10px] uppercase tracking-[0.25em] text-white/25">
-          Arraste para explorar
-        </span>
       </div>
 
       {/* GLOW INFERIOR */}

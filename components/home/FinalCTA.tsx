@@ -117,12 +117,12 @@ export default function FinalCTA() {
           <div className="relative">
             <div className="overflow-hidden rounded-[30px] border border-white/15 bg-black/30 p-2 shadow-[0_30px_100px_rgba(0,0,0,0.40)] backdrop-blur-md">
               {/* MAP HEADER */}
-              <div className="flex items-center justify-between px-4 py-4 sm:px-5">
+              <div className="flex items-center justify-between px-3 py-3.5 sm:px-5 sm:py-4">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full border border-emerald-300/20 bg-emerald-400/10">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full border border-emerald-300/20 bg-emerald-400/10 sm:h-10 sm:w-10">
                     <MapPin
-                      size={18}
-                      className="text-emerald-300"
+                      size={17}
+                      className="text-emerald-300 sm:size-[18px]"
                       strokeWidth={1.8}
                     />
                   </div>
@@ -149,26 +149,32 @@ export default function FinalCTA() {
                   style={{ border: 0 }}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  className="block w-full grayscale-[0.15] contrast-[1.05]"
+                  className="block h-[250px] w-full grayscale-[0.15] contrast-[1.05] sm:h-[390px]"
                 />
 
                 {/* FADE */}
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/45 to-transparent" />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/45 to-transparent sm:h-24" />
               </div>
 
               {/* MAP BUTTON */}
-              <div className="flex items-center justify-between gap-4 px-3 py-4 sm:px-4">
-                <div className="flex items-center gap-2 text-xs text-white/45">
-                  <Navigation size={14} strokeWidth={1.8} />
+              <div className="px-3 py-3.5 sm:flex sm:items-center sm:justify-between sm:gap-4 sm:px-4 sm:py-4">
+                {/* TEXTO */}
+                <div className="mb-2.5 flex items-center gap-2 text-[11px] text-white/45 sm:mb-0 sm:text-xs">
+                  <Navigation
+                    size={13}
+                    strokeWidth={1.8}
+                    className="shrink-0"
+                  />
 
                   <span>Encontre o clube</span>
                 </div>
 
+                {/* BOTÃO */}
                 <a
                   href={mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex shrink-0 items-center gap-2 rounded-full border border-white/15 bg-white/[0.07] px-4 py-2.5 text-xs font-medium text-white transition-all duration-300 hover:border-white/30 hover:bg-white/[0.12]"
+                  className="group flex w-full items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.07] px-4 py-2.5 text-xs font-medium text-white transition-all duration-300 hover:border-white/30 hover:bg-white/[0.12] sm:w-auto"
                 >
                   Ver no Google Maps
 

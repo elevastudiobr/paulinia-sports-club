@@ -118,12 +118,27 @@ export default function Gallery() {
 
       lastTime = currentTime;
 
-      if (!isDraggingRef.current) {
-        const speed = 0.045;
+      /*
+        Velocidade do carrossel.
 
+        Mobile:
+        bem mais rápido para mostrar mais imagens.
+
+        Desktop:
+        também mais rápido que antes, mas um pouco
+        mais controlado para manter a composição visual.
+      */
+      const isMobile = window.innerWidth < 640;
+
+      const speed = isMobile ? 0.30 : 0.12;
+
+      if (!isDraggingRef.current) {
         element.scrollLeft += delta * speed;
       }
 
+      /*
+        Loop infinito usando as imagens duplicadas.
+      */
       const singleSetWidth = element.scrollWidth / 5;
 
       if (element.scrollLeft < singleSetWidth) {
@@ -227,6 +242,7 @@ export default function Gallery() {
       {/* =========================
           BACKGROUND
       ========================== */}
+
       <div className="absolute inset-0">
         <Image
           src="/images/home/galeria/img-3.webp"
@@ -236,42 +252,33 @@ export default function Gallery() {
           className="scale-110 object-cover"
         />
 
-        {/* Escurecimento geral */}
         <div className="absolute inset-0 bg-[#07100b]/45" />
 
-        {/* Transição Structure → Gallery */}
         <div className="absolute inset-x-0 top-0 h-[440px] bg-gradient-to-b from-[#f1f5f1] via-[#d1dfd4]/70 via-[#809b89]/35 to-transparent" />
 
         <div className="absolute inset-x-0 top-0 h-[560px] bg-gradient-to-b from-transparent via-[#365442]/18 to-[#07100b]/10" />
 
-        {/* Gradiente lateral */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#07100b]/75 via-[#07100b]/40 to-[#07100b]/15" />
 
-        {/* Gradiente vertical */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#07100b]/15 to-[#07100b]/90" />
 
-        {/* Luz verde esquerda */}
         <div className="absolute -left-[15%] -top-[10%] h-[650px] w-[650px] rounded-full bg-emerald-400/[0.16] blur-[180px]" />
 
-        {/* Luz verde direita */}
         <div className="absolute -right-[12%] top-[8%] h-[700px] w-[700px] rounded-full bg-green-500/[0.14] blur-[190px]" />
 
-        {/* Luz central */}
         <div className="absolute left-[30%] top-[30%] h-[650px] w-[700px] rounded-full bg-emerald-400/[0.09] blur-[190px]" />
 
-        {/* Luz inferior */}
         <div className="absolute -bottom-[25%] left-[5%] h-[650px] w-[900px] rounded-full bg-emerald-500/[0.10] blur-[210px]" />
 
-        {/* Vinheta */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_12%,rgba(0,0,0,0.20)_100%)]" />
 
-        {/* Fade para o fundo do site */}
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#050817] via-[#050817]/35 to-transparent" />
       </div>
 
       {/* =========================
           HEADER
       ========================== */}
+
       <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
         <div className="mb-12 max-w-3xl sm:mb-16">
           <div className="mb-6 flex items-center gap-3">
@@ -300,6 +307,7 @@ export default function Gallery() {
       {/* =========================
           CARROSSEL
       ========================== */}
+
       <div
         ref={carouselRef}
         onPointerDown={handlePointerDown}
@@ -352,7 +360,6 @@ export default function Gallery() {
                 `}
               />
 
-              {/* Overlay */}
               <div
                 className={`
                   absolute inset-0 transition-all duration-700
@@ -364,7 +371,6 @@ export default function Gallery() {
                 `}
               />
 
-              {/* Brilho verde ao selecionar */}
               <div
                 className={`
                   pointer-events-none absolute inset-0 transition-all duration-700
@@ -376,7 +382,6 @@ export default function Gallery() {
                 `}
               />
 
-              {/* Borda interna */}
               <div
                 className={`
                   pointer-events-none absolute inset-[1px] rounded-[25px] border transition-all duration-700
@@ -388,7 +393,6 @@ export default function Gallery() {
                 `}
               />
 
-              {/* Glow da imagem selecionada */}
               {isSelected && (
                 <div className="pointer-events-none absolute inset-0 rounded-[26px] ring-1 ring-white/20" />
               )}
@@ -400,6 +404,7 @@ export default function Gallery() {
       {/* =========================
           FOOTER DA GALERIA
       ========================== */}
+
       <div className="relative z-10 mx-auto mt-4 max-w-7xl px-6 sm:px-8 lg:px-10">
         <div className="flex items-center justify-between border-t border-white/10 pt-6">
           <div className="flex items-center gap-3">

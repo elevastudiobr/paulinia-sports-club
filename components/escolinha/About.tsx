@@ -3,19 +3,18 @@ import Image from "next/image";
 const highlights = [
   {
     number: "04–16",
-    title: "Anos",
-    description: "Faixa etária voltada à formação de jovens atletas.",
+    title: "Faixa etária",
+    description: "Formação de jovens atletas dos 4 aos 16 anos.",
   },
   {
     number: "01",
     title: "Escola Oficial",
-    description:
-      "A experiência de formação ligada à metodologia do São Paulo FC.",
+    description: "Metodologia e experiência ligadas ao São Paulo FC.",
   },
   {
     number: "∞",
     title: "Desenvolvimento",
-    description: "Uma jornada construída dentro e fora de campo.",
+    description: "Evolução dentro e fora de campo, em cada etapa.",
   },
 ];
 
@@ -88,51 +87,56 @@ export default function About() {
         </div>
 
         {/* CARDS DE VIDRO */}
-        <div className="mt-20 grid gap-4 md:grid-cols-3">
+        <div className="mt-12 grid grid-cols-3 gap-2.5 sm:mt-20 sm:gap-4 md:grid-cols-3">
           {highlights.map((item, index) => (
             <div
               key={item.title}
-              className="group relative min-h-[250px] overflow-hidden rounded-[28px] border border-white/[0.15] bg-white/[0.018] p-8 shadow-[0_25px_80px_rgba(0,0,0,0.22)] backdrop-blur-2xl transition-all duration-500 hover:-translate-y-1 hover:border-white/[0.24] hover:bg-white/[0.035] hover:shadow-[0_30px_90px_rgba(0,0,0,0.32)] sm:p-10"
+              className="group relative min-h-[165px] overflow-hidden rounded-2xl border border-white/[0.15] bg-white/[0.018] p-3.5 shadow-[0_20px_60px_rgba(0,0,0,0.22)] backdrop-blur-2xl transition-all duration-500 hover:-translate-y-1 hover:border-white/[0.24] hover:bg-white/[0.035] hover:shadow-[0_30px_90px_rgba(0,0,0,0.32)] sm:min-h-[250px] sm:rounded-[28px] sm:p-8 md:p-10"
             >
-              {/* Camada de vidro extremamente sutil */}
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.055] via-transparent to-red-500/[0.018]" />
 
-              {/* Reflexo no topo do vidro */}
-              <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/35 to-transparent" />
+              <div className="pointer-events-none absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-white/35 to-transparent sm:inset-x-8" />
 
-              {/* Reflexo suave no canto */}
-              <div className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-white/[0.035] blur-3xl transition-all duration-700 group-hover:bg-red-500/[0.05]" />
+              <div className="pointer-events-none absolute -right-16 -top-16 h-32 w-32 rounded-full bg-white/[0.035] blur-3xl transition-all duration-700 group-hover:bg-red-500/[0.05] sm:-right-20 sm:-top-20 sm:h-48 sm:w-48" />
 
-              {/* Brilho vermelho quase imperceptível */}
-              <div className="pointer-events-none absolute -bottom-24 -left-16 h-44 w-44 rounded-full bg-red-600/[0.025] blur-3xl" />
+              <div className="pointer-events-none absolute -bottom-16 -left-12 h-32 w-32 rounded-full bg-red-600/[0.025] blur-3xl sm:-bottom-24 sm:-left-16 sm:h-44 sm:w-44" />
 
-              {/* Divisória entre os cards */}
               {index !== 0 && (
-                <div className="absolute left-0 top-10 hidden h-[calc(100%-80px)] w-px bg-gradient-to-b from-transparent via-white/[0.08] to-transparent md:block" />
+                <div className="absolute left-0 top-6 hidden h-[calc(100%-48px)] w-px bg-gradient-to-b from-transparent via-white/[0.08] to-transparent md:block sm:top-10 sm:h-[calc(100%-80px)]" />
               )}
 
-              <div className="relative z-10">
-                <span className="text-4xl font-medium tracking-[-0.04em] text-white drop-shadow-[0_2px_12px_rgba(255,255,255,0.08)]">
+              <div className="relative z-10 flex h-full flex-col">
+                <span className="block text-[23px] font-medium leading-none tracking-[-0.05em] text-white drop-shadow-[0_2px_12px_rgba(255,255,255,0.08)] sm:text-4xl">
                   {item.number}
                 </span>
-              </div>
 
-              <div className="relative z-10 mt-16">
-                <h3 className="text-xl font-medium text-white">
-                  {item.title}
-                </h3>
+                <div className="mt-auto pt-6 sm:pt-14">
+                  <div className="mb-2 h-px w-5 bg-red-500/70 sm:mb-4 sm:w-8" />
 
-                <p className="mt-3 max-w-xs text-sm leading-6 text-white/50">
-                  {item.description}
-                </p>
+                  {item.title === "Desenvolvimento" ? (
+                    <h3 className="text-[10px] font-medium leading-[1.15] tracking-[-0.01em] text-white sm:text-xl">
+                      Desenvol
+                      <br />
+                      vimento
+                    </h3>
+                  ) : (
+                    <h3 className="text-[12px] font-medium leading-[1.15] tracking-[-0.01em] text-white sm:text-xl">
+                      {item.title}
+                    </h3>
+                  )}
+
+                  <p className="mt-1.5 w-full max-w-[125px] text-[8px] leading-[1.5] text-white/50 sm:mt-3 sm:max-w-xs sm:text-sm sm:leading-6">
+                    {item.description}
+                  </p>
+                </div>
               </div>
             </div>
           ))}
         </div>
 
         {/* COMPETIÇÃO */}
-        <div className="mt-20 grid gap-10 lg:grid-cols-[1fr_0.8fr] lg:items-center">
-          <div className="group relative min-h-[420px] overflow-hidden rounded-[30px] border border-white/[0.12] bg-black/40 shadow-[0_30px_100px_rgba(0,0,0,0.35)]">
+        <div className="mt-14 grid gap-10 lg:mt-20 lg:grid-cols-[1fr_0.8fr] lg:items-center">
+          <div className="group relative min-h-[350px] overflow-hidden rounded-[26px] border border-white/[0.12] bg-black/40 shadow-[0_30px_100px_rgba(0,0,0,0.35)] sm:min-h-[420px] sm:rounded-[30px]">
             <Image
               src="/images/escolinha/about/about-2.webp"
               alt="Atletas da Escola Oficial São Paulo FC"
@@ -145,7 +149,7 @@ export default function About() {
 
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(200,20,40,0.18),transparent_45%)]" />
 
-            <div className="absolute bottom-0 left-0 z-10 p-8 sm:p-10">
+            <div className="absolute bottom-0 left-0 z-10 p-6 sm:p-10">
               <div className="h-px w-10 bg-red-600 transition-all duration-500 group-hover:w-16" />
 
               <p className="mt-4 max-w-md text-sm leading-6 text-white/75">
