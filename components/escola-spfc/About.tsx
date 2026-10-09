@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { motion, useReducedMotion } from "motion/react";
 
 const highlights = [
   {
@@ -19,11 +22,38 @@ const highlights = [
 ];
 
 export default function About() {
+  const shouldReduceMotion = useReducedMotion();
+
+  const revealVariants = {
+    hidden: {
+      opacity: 0,
+      y: shouldReduceMotion ? 0 : 24,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.7,
+        ease: [0.22, 1, 0.36, 1] as const,
+      },
+    },
+  };
+
+  const staggerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: shouldReduceMotion ? 0 : 0.15,
+      },
+    },
+  };
+
   return (
     <section
       id="sobre"
       className="relative overflow-hidden bg-[#050507] py-24 sm:py-32 lg:py-40"
     >
+      {/* BACKGROUND */}
       <div className="absolute inset-0">
         <Image
           src="/images/escolinha/about/about-1.webp"
@@ -52,50 +82,81 @@ export default function About() {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,rgba(0,0,0,0.45)_100%)]" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
-        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
-          <div>
-            <div className="mb-6 flex items-center gap-3">
+      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
+        {/* INTRODUÇÃO */}
+        <motion.div
+          className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-end"
+          variants={staggerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <motion.div variants={staggerVariants}>
+            <motion.div
+              variants={revealVariants}
+              className="mb-6 flex items-center gap-3"
+            >
               <span className="h-px w-10 bg-red-600" />
 
               <span className="text-xs font-semibold uppercase tracking-[0.28em] text-red-400">
                 Sobre a escola
               </span>
-            </div>
+            </motion.div>
 
-            <h2 className="text-4xl font-semibold leading-[1.02] tracking-[-0.04em] text-white sm:text-5xl lg:text-6xl">
-              Mais do que
+            <motion.h2
+              variants={revealVariants}
+              className="text-4xl font-semibold leading-[1.02] tracking-[-0.04em] text-white sm:text-5xl lg:text-6xl"
+            >
+              Seu filho veste a camisa.
               <br />
-              <span className="text-white/55">treinar futebol.</span>
-            </h2>
-          </div>
+              <span className="text-white/55">
+                A gente ensina a honrar ela.
+              </span>
+            </motion.h2>
+          </motion.div>
 
-          <div className="max-w-2xl lg:ml-auto">
-            <p className="text-base leading-8 text-white/75 sm:text-lg">
+          <motion.div
+            variants={staggerVariants}
+            className="max-w-2xl lg:ml-auto"
+          >
+            <motion.p
+              variants={revealVariants}
+              className="text-base leading-8 text-white/75 sm:text-lg"
+            >
               A Escola Oficial São Paulo FC em Paulínia foi pensada para
               acompanhar jovens atletas em diferentes etapas da formação,
               unindo futebol, disciplina e desenvolvimento.
-            </p>
+            </motion.p>
 
-            <p className="mt-5 text-base leading-8 text-white/55">
+            <motion.p
+              variants={revealVariants}
+              className="mt-5 text-base leading-8 text-white/55"
+            >
               Dos 4 aos 16 anos, os alunos vivenciam uma rotina de treinamento
               e competição, com participação em campeonatos e experiências
               que podem contribuir para o desenvolvimento de cada atleta
               dentro do futebol.
-            </p>
-          </div>
-        </div>
+            </motion.p>
+          </motion.div>
+        </motion.div>
 
         {/* CARDS DE VIDRO */}
-        <div className="mt-12 grid grid-cols-3 gap-2.5 sm:mt-20 sm:gap-4 md:grid-cols-3">
+        <motion.div
+          className="mt-12 grid grid-cols-3 gap-1.5 sm:mt-20 sm:gap-4 md:grid-cols-3"
+          variants={staggerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+        >
           {highlights.map((item, index) => (
-            <div
+            <motion.div
               key={item.title}
-              className="group relative min-h-[165px] overflow-hidden rounded-2xl border border-white/[0.15] bg-white/[0.018] p-3.5 shadow-[0_20px_60px_rgba(0,0,0,0.22)] backdrop-blur-2xl transition-all duration-500 hover:-translate-y-1 hover:border-white/[0.24] hover:bg-white/[0.035] hover:shadow-[0_30px_90px_rgba(0,0,0,0.32)] sm:min-h-[250px] sm:rounded-[28px] sm:p-8 md:p-10"
+              variants={revealVariants}
+              className="group relative min-h-[165px] overflow-hidden rounded-2xl border border-white/[0.15] bg-white/[0.018] p-2.5 shadow-[0_20px_60px_rgba(0,0,0,0.22)] backdrop-blur-2xl transition-all duration-500 hover:-translate-y-1 hover:border-white/[0.24] hover:bg-white/[0.035] hover:shadow-[0_30px_90px_rgba(0,0,0,0.32)] sm:min-h-[250px] sm:rounded-[28px] sm:p-8 md:p-10"
             >
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.055] via-transparent to-red-500/[0.018]" />
 
-              <div className="pointer-events-none absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-white/35 to-transparent sm:inset-x-8" />
+              <div className="pointer-events-none absolute inset-x-3 top-0 h-px bg-gradient-to-r from-transparent via-white/35 to-transparent sm:inset-x-8" />
 
               <div className="pointer-events-none absolute -right-16 -top-16 h-32 w-32 rounded-full bg-white/[0.035] blur-3xl transition-all duration-700 group-hover:bg-red-500/[0.05] sm:-right-20 sm:-top-20 sm:h-48 sm:w-48" />
 
@@ -110,33 +171,41 @@ export default function About() {
                   {item.number}
                 </span>
 
+                {/* CONTEÚDO ALINHADO */}
                 <div className="mt-auto pt-6 sm:pt-14">
-                  <div className="mb-2 h-px w-5 bg-red-500/70 sm:mb-4 sm:w-8" />
+                  <div className="mb-3 h-px w-5 bg-red-500/70 sm:mb-4 sm:w-8" />
 
-                  {item.title === "Desenvolvimento" ? (
-                    <h3 className="text-[10px] font-medium leading-[1.15] tracking-[-0.01em] text-white sm:text-xl">
-                      Desenvol
-                      <br />
-                      vimento
-                    </h3>
-                  ) : (
-                    <h3 className="text-[12px] font-medium leading-[1.15] tracking-[-0.01em] text-white sm:text-xl">
-                      {item.title}
-                    </h3>
-                  )}
+                  <h3
+                    className={`h-7 whitespace-nowrap font-medium leading-7 text-white sm:h-8 sm:text-xl sm:leading-8 ${
+                      item.title === "Desenvolvimento"
+                        ? "text-[9px] tracking-[-0.055em] min-[380px]:text-[10px] min-[380px]:tracking-[-0.04em]"
+                        : "text-[10px] tracking-[-0.04em]"
+                    }`}
+                  >
+                    {item.title}
+                  </h3>
 
-                  <p className="mt-1.5 w-full max-w-[125px] text-[8px] leading-[1.5] text-white/50 sm:mt-3 sm:max-w-xs sm:text-sm sm:leading-6">
+                  <p className="mt-1.5 min-h-[36px] w-full text-[8px] leading-[1.5] text-white/50 sm:mt-3 sm:min-h-[48px] sm:max-w-xs sm:text-sm sm:leading-6">
                     {item.description}
                   </p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* COMPETIÇÃO */}
-        <div className="mt-14 grid gap-10 lg:mt-20 lg:grid-cols-[1fr_0.8fr] lg:items-center">
-          <div className="group relative min-h-[350px] overflow-hidden rounded-[26px] border border-white/[0.12] bg-black/40 shadow-[0_30px_100px_rgba(0,0,0,0.35)] sm:min-h-[420px] sm:rounded-[30px]">
+        <motion.div
+          className="mt-14 grid gap-10 lg:mt-20 lg:grid-cols-[1fr_0.8fr] lg:items-center"
+          variants={staggerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+        >
+          <motion.div
+            variants={revealVariants}
+            className="group relative min-h-[350px] overflow-hidden rounded-[26px] border border-white/[0.12] bg-black/40 shadow-[0_30px_100px_rgba(0,0,0,0.35)] sm:min-h-[420px] sm:rounded-[30px]"
+          >
             <Image
               src="/images/escolinha/about/about-2.webp"
               alt="Atletas da Escola Oficial São Paulo FC"
@@ -158,35 +227,51 @@ export default function About() {
                 o que desenvolvem nos treinamentos.
               </p>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="lg:pl-8">
-            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-red-400">
+          <motion.div
+            variants={staggerVariants}
+            className="lg:pl-8"
+          >
+            <motion.span
+              variants={revealVariants}
+              className="text-xs font-semibold uppercase tracking-[0.25em] text-red-400"
+            >
               Caminho no futebol
-            </span>
+            </motion.span>
 
-            <h3 className="mt-5 text-3xl font-semibold leading-tight tracking-[-0.03em] text-white sm:text-4xl">
-              Evolução que pode
+            <motion.h3
+              variants={revealVariants}
+              className="mt-5 text-3xl font-semibold leading-tight tracking-[-0.03em] text-white sm:text-4xl"
+            >
+              Quem evolui aqui, é visto.
               <br />
-              <span className="text-white/50">abrir novos caminhos.</span>
-            </h3>
+              <span className="text-white/50">é visto.</span>
+            </motion.h3>
 
-            <p className="mt-6 text-base leading-7 text-white/60">
+            <motion.p
+              variants={revealVariants}
+              className="mt-6 text-base leading-7 text-white/60"
+            >
               A vivência em treinamentos e competições permite que cada atleta
               desenvolva suas habilidades, ganhe experiência e conheça melhor
               o ambiente do futebol competitivo.
-            </p>
+            </motion.p>
 
-            <p className="mt-5 text-base leading-7 text-white/45">
+            <motion.p
+              variants={revealVariants}
+              className="mt-5 text-base leading-7 text-white/45"
+            >
               Para quem demonstra evolução e potencial, a trajetória também
               pode proporcionar oportunidades de desenvolvimento e observação
               dentro do futebol, sempre respeitando o processo individual de
               cada atleta.
-            </p>
-          </div>
-        </div>
+            </motion.p>
+          </motion.div>
+        </motion.div>
       </div>
 
+      {/* GLOW INFERIOR */}
       <div className="pointer-events-none absolute bottom-[-180px] left-1/2 z-10 h-[400px] w-[900px] -translate-x-1/2 rounded-full bg-red-950/[0.20] blur-[150px]" />
     </section>
   );

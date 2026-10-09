@@ -19,13 +19,13 @@ const homeWhatsappUrl =
 const schoolWhatsappUrl =
   "https://wa.me/5519999812525?text=" +
   encodeURIComponent(
-    "Olá! Tenho interesse em agendar uma aula na Escola Oficial São Paulo FC em Paulínia. Poderiam me passar mais informações?"
+    "Olá! Tenho interesse em agendar uma aula experimental na Escola Oficial São Paulo FC em Paulínia. Poderiam me passar mais informações?"
   );
 
 export default function Navbar() {
   const pathname = usePathname();
 
-  const isSchoolPage = pathname === "/escolinha";
+  const isSchoolPage = pathname === "/escola-spfc";
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -35,7 +35,7 @@ export default function Navbar() {
     : homeWhatsappUrl;
 
   const whatsappLabel = isSchoolPage
-    ? "Agendar aula"
+    ? "Agendar aula experimental"
     : "Agendar horário";
 
   useEffect(() => {
@@ -85,7 +85,7 @@ export default function Navbar() {
   const goToSchool = () => {
     setMenuOpen(false);
 
-    if (window.location.pathname === "/escolinha") {
+    if (window.location.pathname === "/escola-spfc") {
       window.scrollTo({
         top: 0,
         behavior: "smooth",
@@ -93,7 +93,7 @@ export default function Navbar() {
       return;
     }
 
-    window.location.href = "/escolinha";
+    window.location.href = "/escola-spfc";
   };
 
   return (
@@ -209,7 +209,7 @@ export default function Navbar() {
               Início
             </button>
 
-            {/* LOCAÇÃO */}
+            {/* LOCAÇÃO E ESTRUTURA */}
             {navItems.map((item) => (
               <button
                 key={item.id}
@@ -221,7 +221,7 @@ export default function Navbar() {
               </button>
             ))}
 
-            {/* ESCOLA */}
+            {/* ESCOLA OFICIAL SPFC */}
             <button
               type="button"
               onClick={goToSchool}
@@ -230,7 +230,7 @@ export default function Navbar() {
               Escola Oficial SPFC
             </button>
 
-            {/* CTA */}
+            {/* CTA WHATSAPP */}
             <a
               href={whatsappUrl}
               target="_blank"

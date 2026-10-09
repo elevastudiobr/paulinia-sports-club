@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from "next/image";
@@ -6,14 +7,14 @@ import { usePathname } from "next/navigation";
 
 export default function Footer() {
   const pathname = usePathname();
-  const isSchoolPage = pathname === "/escolinha";
+  const isSchoolPage = pathname === "/escola-spfc";
 
   const instagramUrl = isSchoolPage
     ? "https://www.instagram.com/spfcpaulinia/"
     : "https://www.instagram.com/pauliniasportsclub/";
 
   const whatsappUrl = isSchoolPage
-    ? "https://wa.me/551999812525?text=" +
+    ? "https://wa.me/5519999812525?text=" +
       encodeURIComponent(
         "Olá! Tenho interesse em agendar uma aula na Escola Oficial São Paulo FC em Paulínia. Poderiam me passar mais informações?"
       )
@@ -38,7 +39,7 @@ export default function Footer() {
           : "border-t border-white/10 bg-[#050817]"
       }`}
     >
-      {/* TRANSIÇÃO DA CTA PARA O FOOTER — ESCOLINHA */}
+      {/* TRANSIÇÃO DA CTA PARA O FOOTER — ESCOLA SPFC */}
       {isSchoolPage && (
         <div className="pointer-events-none absolute inset-x-0 -top-32 h-64">
           <div className="absolute inset-0 bg-gradient-to-b from-[#170507] via-[#0b0710]/80 to-[#050817]" />

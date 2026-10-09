@@ -4,9 +4,21 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
-  title: "Paulínia Sports Club",
+  title: {
+    default: "Paulínia Sports Club | Futebol e Esporte",
+    template: "%s | Paulínia Sports Club",
+  },
   description:
-    "Locação de quadras e escolinha de futebol em Paulínia.",
+    "Conheça o Paulínia Sports Club em Paulínia. Confira nossa estrutura esportiva, alugue quadras e conheça a Escola Oficial São Paulo FC.",
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    siteName: "Paulínia Sports Club",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

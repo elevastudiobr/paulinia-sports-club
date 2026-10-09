@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef } from "react";
 
 const images = [
@@ -17,101 +18,75 @@ const images = [
   "/images/escolinha/galeria/img-11.webp",
   "/images/escolinha/galeria/img-12.webp",
   "/images/escolinha/galeria/img-13.webp",
+  "/images/escolinha/galeria/img-14.webp",
+  "/images/escolinha/galeria/img-15.webp",
+  "/images/escolinha/galeria/img-16.webp",
+  "/images/escolinha/galeria/img-17.webp",
+  "/images/escolinha/galeria/img-18.webp",
+  "/images/escolinha/galeria/img-19.webp",
+  "/images/escolinha/galeria/img-20.webp",
 ];
 
 const mural = [
-  {
-    image: images[0],
-    width: 300,
-    height: 360,
-    top: 65,
-  },
-  {
-    image: images[1],
-    width: 430,
-    height: 300,
-    top: 0,
-  },
-  {
-    image: images[2],
-    width: 250,
-    height: 330,
-    top: 185,
-  },
-  {
-    image: images[3],
-    width: 390,
-    height: 290,
-    top: 35,
-  },
-  {
-    image: images[4],
-    width: 330,
-    height: 390,
-    top: 145,
-  },
-  {
-    image: images[5],
-    width: 450,
-    height: 300,
-    top: 0,
-  },
-  {
-    image: images[6],
-    width: 270,
-    height: 345,
-    top: 190,
-  },
-  {
-    image: images[7],
-    width: 400,
-    height: 310,
-    top: 25,
-  },
-  {
-    image: images[8],
-    width: 310,
-    height: 370,
-    top: 150,
-  },
-  {
-    image: images[9],
-    width: 450,
-    height: 300,
-    top: 0,
-  },
-  {
-    image: images[10],
-    width: 275,
-    height: 350,
-    top: 185,
-  },
-  {
-    image: images[11],
-    width: 410,
-    height: 295,
-    top: 35,
-  },
-  {
-    image: images[12],
-    width: 325,
-    height: 375,
-    top: 145,
-  },
+  { image: images[0], width: 300, height: 360, top: 65 },
+  { image: images[1], width: 430, height: 300, top: 0 },
+  { image: images[2], width: 250, height: 330, top: 185 },
+  { image: images[3], width: 390, height: 290, top: 35 },
+  { image: images[4], width: 330, height: 390, top: 145 },
+  { image: images[5], width: 450, height: 300, top: 0 },
+  { image: images[6], width: 270, height: 345, top: 190 },
+  { image: images[7], width: 400, height: 310, top: 25 },
+  { image: images[8], width: 310, height: 370, top: 150 },
+  { image: images[9], width: 450, height: 300, top: 0 },
+  { image: images[10], width: 275, height: 350, top: 185 },
+  { image: images[11], width: 410, height: 295, top: 35 },
+  { image: images[12], width: 325, height: 375, top: 145 },
+  { image: images[13], width: 420, height: 305, top: 20 },
+  { image: images[14], width: 290, height: 355, top: 170 },
+  { image: images[15], width: 440, height: 300, top: 0 },
+  { image: images[16], width: 315, height: 370, top: 130 },
+  { image: images[17], width: 390, height: 290, top: 45 },
+  { image: images[18], width: 280, height: 345, top: 180 },
+  { image: images[19], width: 430, height: 310, top: 15 },
 ];
 
 export default function Gallery() {
   const trackRef = useRef<HTMLDivElement>(null);
 
   const positionRef = useRef(0);
-
-  const velocityRef = useRef(-5.0);
+  const velocityRef = useRef(-0.42);
 
   const draggingRef = useRef(false);
   const startXRef = useRef(0);
   const startPositionRef = useRef(0);
 
   const animationRef = useRef<number | null>(null);
+
+  const shouldReduceMotion = useReducedMotion();
+
+  const revealVariants = {
+    hidden: {
+      opacity: 0,
+      y: shouldReduceMotion ? 0 : 22,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.8,
+        ease: [0.22, 1, 0.36, 1] as const,
+      },
+    },
+  };
+
+  const staggerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: shouldReduceMotion ? 0 : 0.13,
+      },
+    },
+  };
 
   useEffect(() => {
     const track = trackRef.current;
@@ -121,8 +96,11 @@ export default function Gallery() {
     const updateVelocity = () => {
       const isMobile = window.innerWidth < 640;
 
-      // Movimento muito mais rápido no mobile
-      velocityRef.current = isMobile ? -5.0 : -0.42;
+      velocityRef.current = shouldReduceMotion
+        ? 0
+        : isMobile
+          ? -5.0
+          : -0.42;
     };
 
     updateVelocity();
@@ -136,12 +114,14 @@ export default function Gallery() {
 
       const loopWidth = track.scrollWidth / 2;
 
-      if (positionRef.current <= -loopWidth) {
-        positionRef.current += loopWidth;
-      }
+      if (loopWidth > 0) {
+        if (positionRef.current <= -loopWidth) {
+          positionRef.current += loopWidth;
+        }
 
-      if (positionRef.current > 0) {
-        positionRef.current -= loopWidth;
+        if (positionRef.current > 0) {
+          positionRef.current -= loopWidth;
+        }
       }
 
       track.style.transform = `translate3d(${positionRef.current}px, 0, 0)`;
@@ -158,7 +138,7 @@ export default function Gallery() {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, []);
+  }, [shouldReduceMotion]);
 
   const handlePointerDown = (
     event: React.PointerEvent<HTMLDivElement>,
@@ -195,6 +175,13 @@ export default function Gallery() {
     }
   };
 
+  const handlePointerCancel = (
+    event: React.PointerEvent<HTMLDivElement>,
+  ) => {
+    draggingRef.current = false;
+    event.currentTarget.style.cursor = "grab";
+  };
+
   return (
     <section
       id="galeria"
@@ -226,33 +213,64 @@ export default function Gallery() {
       </div>
 
       {/* HEADER */}
-      <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
+      <motion.div
+        className="relative z-10 mx-auto max-w-7xl px-6 sm:px-8 lg:px-10"
+        variants={staggerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.25 }}
+      >
         <div className="max-w-3xl">
-          <div className="mb-6 flex items-center gap-3">
+          <motion.div
+            variants={revealVariants}
+            className="mb-6 flex items-center gap-3"
+          >
             <span className="h-px w-10 bg-red-600" />
 
             <span className="text-xs font-semibold uppercase tracking-[0.28em] text-red-400">
               Galeria
             </span>
-          </div>
+          </motion.div>
 
-          <h2 className="text-4xl font-semibold leading-[1.02] tracking-[-0.04em] text-white sm:text-5xl lg:text-7xl">
+          <motion.h2
+            variants={revealVariants}
+            className="text-4xl font-semibold leading-[1.02] tracking-[-0.04em] text-white sm:text-5xl lg:text-7xl"
+          >
             Futebol que se vive
             <br />
             <span className="text-white/45">
               dentro e fora de campo.
             </span>
-          </h2>
+          </motion.h2>
 
-          <p className="mt-7 max-w-xl text-base leading-7 text-white/55 sm:text-lg">
+          <motion.p
+            variants={revealVariants}
+            className="mt-7 max-w-xl text-base leading-7 text-white/55 sm:text-lg"
+          >
             Treinos, jogos, campeonatos e momentos que fazem parte da jornada
             de cada atleta.
-          </p>
+          </motion.p>
         </div>
-      </div>
+      </motion.div>
 
       {/* MURAL */}
-      <div className="relative z-10 mt-12 h-[410px] w-full overflow-hidden sm:mt-16 sm:h-[600px]">
+      <motion.div
+        className="relative z-10 mt-12 h-[410px] w-full overflow-hidden sm:mt-16 sm:h-[600px]"
+        initial={{
+          opacity: 0,
+          y: shouldReduceMotion ? 0 : 28,
+        }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+        }}
+        transition={{
+          duration: shouldReduceMotion ? 0 : 0.9,
+          delay: shouldReduceMotion ? 0 : 0.15,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+        viewport={{ once: true, amount: 0.1 }}
+      >
         <div
           ref={trackRef}
           className="absolute left-0 top-0 flex w-max select-none gap-2 pl-2 sm:gap-3 sm:pl-5 lg:gap-4 lg:pl-6"
@@ -264,14 +282,8 @@ export default function Gallery() {
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
-          onPointerCancel={(event) => {
-            draggingRef.current = false;
-            event.currentTarget.style.cursor = "grab";
-          }}
-          onLostPointerCapture={(event) => {
-            draggingRef.current = false;
-            event.currentTarget.style.cursor = "grab";
-          }}
+          onPointerCancel={handlePointerCancel}
+          onLostPointerCapture={handlePointerCancel}
         >
           {[...mural, ...mural].map((item, index) => (
             <div
@@ -300,10 +312,16 @@ export default function Gallery() {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       {/* INDICADOR */}
-      <div className="relative z-10 mx-auto mt-1 max-w-7xl px-6 sm:mt-2 sm:px-8 lg:px-10">
+      <motion.div
+        className="relative z-10 mx-auto mt-1 max-w-7xl px-6 sm:mt-2 sm:px-8 lg:px-10"
+        variants={revealVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+      >
         <div className="flex items-center justify-between border-t border-white/[0.10] pt-4 sm:pt-5">
           <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
             <span className="h-px w-5 shrink-0 bg-red-600/80 sm:w-8" />
@@ -321,7 +339,7 @@ export default function Gallery() {
             </span>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* GLOW INFERIOR */}
       <div className="pointer-events-none absolute bottom-[-180px] left-1/2 z-10 h-[400px] w-[900px] -translate-x-1/2 rounded-full bg-red-950/[0.16] blur-[150px]" />

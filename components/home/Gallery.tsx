@@ -2,8 +2,9 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState, type PointerEvent } from "react";
+import { motion, useReducedMotion } from "motion/react";
 
-const images = Array.from({ length: 15 }, (_, index) => ({
+const images = Array.from({ length: 21 }, (_, index) => ({
   src: `/images/home/galeria/img-${index + 1}.webp`,
   alt: `Paulínia Sports Club - imagem ${index + 1}`,
 }));
@@ -86,6 +87,41 @@ const layouts = [
   },
 ];
 
+const extraLayouts = [
+  {
+    width: "w-[250px] sm:w-[310px]",
+    height: "h-[340px] sm:h-[410px]",
+    offset: "-translate-y-6",
+  },
+  {
+    width: "w-[300px] sm:w-[360px]",
+    height: "h-[300px] sm:h-[360px]",
+    offset: "translate-y-10",
+  },
+  {
+    width: "w-[220px] sm:w-[270px]",
+    height: "h-[370px] sm:h-[440px]",
+    offset: "-translate-y-8",
+  },
+  {
+    width: "w-[290px] sm:w-[350px]",
+    height: "h-[280px] sm:h-[340px]",
+    offset: "translate-y-6",
+  },
+  {
+    width: "w-[240px] sm:w-[290px]",
+    height: "h-[360px] sm:h-[430px]",
+    offset: "-translate-y-4",
+  },
+  {
+    width: "w-[300px] sm:w-[360px]",
+    height: "h-[320px] sm:h-[380px]",
+    offset: "translate-y-8",
+  },
+];
+
+const allLayouts = [...layouts, ...extraLayouts];
+
 export default function Gallery() {
   const carouselRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | null>(null);
@@ -94,6 +130,8 @@ export default function Gallery() {
   const startXRef = useRef(0);
   const scrollStartRef = useRef(0);
   const hasDraggedRef = useRef(false);
+
+  const shouldReduceMotion = useReducedMotion();
 
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -115,44 +153,31 @@ export default function Gallery() {
 
     const animate = (currentTime: number) => {
       const delta = currentTime - lastTime;
-
       lastTime = currentTime;
 
-      /*
-        Velocidade do carrossel.
-
-        Mobile:
-        bem mais rápido para mostrar mais imagens.
-
-        Desktop:
-        também mais rápido que antes, mas um pouco
-        mais controlado para manter a composição visual.
-      */
       const isMobile = window.innerWidth < 640;
-
       const speed = isMobile ? 0.30 : 0.12;
 
-      if (!isDraggingRef.current) {
+      if (!shouldReduceMotion && !isDraggingRef.current) {
         element.scrollLeft += delta * speed;
       }
 
-      /*
-        Loop infinito usando as imagens duplicadas.
-      */
       const singleSetWidth = element.scrollWidth / 5;
 
-      if (element.scrollLeft < singleSetWidth) {
-        element.scrollLeft += singleSetWidth * 2;
-      }
+      if (singleSetWidth > 0) {
+        if (element.scrollLeft < singleSetWidth) {
+          element.scrollLeft += singleSetWidth * 2;
+        }
 
-      if (element.scrollLeft > singleSetWidth * 4) {
-        element.scrollLeft -= singleSetWidth * 2;
+        if (element.scrollLeft > singleSetWidth * 4) {
+          element.scrollLeft -= singleSetWidth * 2;
+        }
       }
 
       animationRef.current = requestAnimationFrame(animate);
     };
 
-    requestAnimationFrame(() => {
+    const initialPosition = requestAnimationFrame(() => {
       if (element) {
         element.scrollLeft = (element.scrollWidth / 5) * 2;
       }
@@ -161,11 +186,13 @@ export default function Gallery() {
     animationRef.current = requestAnimationFrame(animate);
 
     return () => {
-      if (animationRef.current) {
+      cancelAnimationFrame(initialPosition);
+
+      if (animationRef.current !== null) {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, []);
+  }, [shouldReduceMotion]);
 
   const handlePointerDown = (
     event: PointerEvent<HTMLDivElement>,
@@ -175,13 +202,9 @@ export default function Gallery() {
     if (!element) return;
 
     isDraggingRef.current = true;
-
     setIsDragging(true);
-
     hasDraggedRef.current = false;
-
     startXRef.current = event.clientX;
-
     scrollStartRef.current = element.scrollLeft;
 
     element.setPointerCapture(event.pointerId);
@@ -209,7 +232,6 @@ export default function Gallery() {
     const element = carouselRef.current;
 
     isDraggingRef.current = false;
-
     setIsDragging(false);
 
     if (
@@ -222,7 +244,6 @@ export default function Gallery() {
 
   const handlePointerCancel = () => {
     isDraggingRef.current = false;
-
     setIsDragging(false);
   };
 
@@ -239,9 +260,7 @@ export default function Gallery() {
       id="galeria"
       className="relative overflow-hidden bg-[#07100b] py-24 sm:py-32 lg:py-40"
     >
-      {/* =========================
-          BACKGROUND
-      ========================== */}
+      {/* BACKGROUND */}
 
       <div className="absolute inset-0">
         <Image
@@ -275,12 +294,16 @@ export default function Gallery() {
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#050817] via-[#050817]/35 to-transparent" />
       </div>
 
-      {/* =========================
-          HEADER
-      ========================== */}
+      {/* HEADER */}
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
-        <div className="mb-12 max-w-3xl sm:mb-16">
+        <motion.div
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-12 max-w-3xl sm:mb-16"
+        >
           <div className="mb-6 flex items-center gap-3">
             <span className="h-px w-10 bg-emerald-300/70" />
 
@@ -301,28 +324,32 @@ export default function Gallery() {
             Um pouco do espaço, das quadras e dos momentos
             que fazem parte da experiência no Paulínia Sports Club.
           </p>
-        </div>
+        </motion.div>
       </div>
 
-      {/* =========================
-          CARROSSEL
-      ========================== */}
+      {/* CARROSSEL */}
 
-      <div
+      <motion.div
+        initial={shouldReduceMotion ? false : { opacity: 0, y: 28 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{
+          duration: 0.8,
+          delay: 0.1,
+          ease: [0.22, 1, 0.36, 1],
+        }}
         ref={carouselRef}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerCancel}
         className={`relative z-10 flex h-[540px] touch-pan-y select-none items-center gap-4 overflow-x-hidden overflow-y-hidden px-6 sm:h-[600px] sm:gap-5 sm:px-8 lg:px-10 ${
-          isDragging
-            ? "cursor-grabbing"
-            : "cursor-grab"
+          isDragging ? "cursor-grabbing" : "cursor-grab"
         }`}
       >
         {loopImages.map((image, index) => {
           const originalIndex = index % images.length;
-          const layout = layouts[originalIndex];
+          const layout = allLayouts[originalIndex];
           const isSelected = selectedIndex === index;
 
           return (
@@ -399,13 +426,21 @@ export default function Gallery() {
             </button>
           );
         })}
-      </div>
+      </motion.div>
 
-      {/* =========================
-          FOOTER DA GALERIA
-      ========================== */}
+      {/* FOOTER DA GALERIA */}
 
-      <div className="relative z-10 mx-auto mt-4 max-w-7xl px-6 sm:px-8 lg:px-10">
+      <motion.div
+        initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{
+          duration: 0.6,
+          delay: 0.15,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+        className="relative z-10 mx-auto mt-4 max-w-7xl px-6 sm:px-8 lg:px-10"
+      >
         <div className="flex items-center justify-between border-t border-white/10 pt-6">
           <div className="flex items-center gap-3">
             <span className="h-px w-6 bg-emerald-400/50" />
@@ -419,7 +454,7 @@ export default function Gallery() {
             Paulínia Sports Club
           </p>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

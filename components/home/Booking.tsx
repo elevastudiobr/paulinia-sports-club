@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
-import { ArrowRight, CalendarDays, Repeat2 } from "lucide-react";
+import { ArrowRight, CalendarDays, Repeat2, Clock3 } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 
 const options = [
   {
@@ -24,6 +27,16 @@ const options = [
   },
 ];
 
+const schedule = [
+  { day: "Segunda-feira", hours: "Consultar disponibilidade" },
+  { day: "Terça-feira", hours: "Consultar disponibilidade" },
+  { day: "Quarta-feira", hours: "Consultar disponibilidade" },
+  { day: "Quinta-feira", hours: "Consultar disponibilidade" },
+  { day: "Sexta-feira", hours: "Consultar disponibilidade" },
+  { day: "Sábado", hours: "Consultar disponibilidade" },
+  { day: "Domingo", hours: "Consultar disponibilidade" },
+];
+
 const generalWhatsappMessage =
   "Olá! Gostaria de agendar um horário para jogar no Paulínia Sports Club. Poderiam me passar as opções de horários disponíveis?";
 
@@ -32,13 +45,39 @@ const generalWhatsappUrl =
   encodeURIComponent(generalWhatsappMessage);
 
 export default function Booking() {
+  const shouldReduceMotion = useReducedMotion();
+
+  const revealVariants = {
+    hidden: {
+      opacity: 0,
+      y: shouldReduceMotion ? 0 : 24,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.65,
+        ease: [0.22, 1, 0.36, 1] as const,
+      },
+    },
+  };
+
+  const staggerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: shouldReduceMotion ? 0 : 0.14,
+      },
+    },
+  };
+
   return (
     <section
       id="locacao"
-      className="relative overflow-hidden bg-[#03050b] py-24 sm:py-32 lg:py-40"
+      className="relative isolate overflow-hidden bg-[#03050b] py-24 text-white sm:py-32 lg:py-36"
     >
       {/* BACKGROUND */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 -z-10">
         <Image
           src="/images/home/quadras/background-2.webp"
           alt=""
@@ -48,48 +87,63 @@ export default function Booking() {
           className="scale-105 object-cover"
         />
 
-        <div className="absolute inset-0 bg-black/35" />
+        <div className="absolute inset-0 bg-[#03050b]/65" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#03050b]/90 via-[#03050b]/65 to-[#03050b]/35" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#03050b]/40 via-[#03050b]/35 to-[#03050b]/90" />
 
-        <div className="absolute inset-0 bg-gradient-to-r from-[#03050b]/90 via-[#03050b]/50 to-[#03050b]/15" />
+        <div className="absolute inset-x-0 bottom-0 h-[420px] bg-gradient-to-b from-transparent via-[#0a2d1e]/30 to-[#0d3825]/90" />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-[#03050b]/80 via-transparent to-[#03050b]/20" />
-
-        {/* TRANSIÇÃO VERDE */}
-        <div className="absolute inset-x-0 bottom-0 h-[360px] bg-gradient-to-b from-transparent via-[#0a2d1e]/35 to-[#0d3825]" />
-
-        <div className="absolute -bottom-48 left-1/2 h-[600px] w-[1000px] -translate-x-1/2 rounded-full bg-emerald-500/[0.055] blur-[170px]" />
-
-        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent to-[#0d3825]/70" />
+        <div className="absolute -bottom-48 left-1/2 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-emerald-500/[0.07] blur-[160px]" />
       </div>
 
-      {/* CONTEÚDO */}
-      <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
         {/* CABEÇALHO */}
-        <div className="mb-10 max-w-2xl sm:mb-14">
-          <div className="mb-6 flex items-center gap-3">
-            <span className="h-px w-10 bg-white/50" />
+        <motion.div
+          className="mb-12 max-w-3xl sm:mb-16"
+          variants={staggerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+        >
+          <motion.div
+            variants={revealVariants}
+            className="mb-6 flex items-center gap-3"
+          >
+            <span className="h-px w-10 bg-emerald-300/70" />
 
-            <span className="text-xs font-medium uppercase tracking-[0.28em] text-white/70">
+            <span className="text-xs font-medium uppercase tracking-[0.28em] text-white/65">
               Locação
             </span>
-          </div>
+          </motion.div>
 
-          <h2 className="text-4xl font-medium leading-[1.02] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
-            Escolha como
+          <motion.h2
+            variants={revealVariants}
+            className="text-4xl font-medium leading-[1.04] tracking-[-0.045em] sm:text-5xl lg:text-7xl"
+          >
+            Quem joga toda semana
             <br />
-            <span className="text-white/75">
-              você quer jogar.
+            <span className="text-white/60">
+              não fica caçando horário.
             </span>
-          </h2>
+          </motion.h2>
 
-          <p className="mt-5 max-w-xl text-base leading-7 text-white/75 sm:mt-6 sm:text-lg">
+          <motion.p
+            variants={revealVariants}
+            className="mt-6 max-w-2xl text-sm leading-7 text-white/70 sm:text-base sm:leading-8"
+          >
             Para uma partida com os amigos ou para quem joga toda semana,
             encontre a forma que melhor combina com você.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        {/* OPÇÕES */}
-        <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-2">
+        {/* OPÇÕES DE LOCAÇÃO */}
+        <motion.div
+          className="grid gap-4 lg:grid-cols-2 lg:gap-6"
+          variants={staggerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+        >
           {options.map((option) => {
             const Icon = option.icon;
 
@@ -98,67 +152,138 @@ export default function Booking() {
               encodeURIComponent(option.whatsappMessage);
 
             return (
-              <a
+              <motion.a
                 key={option.number}
+                variants={revealVariants}
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Agendar ${option.title}`}
-                className="group relative block overflow-hidden rounded-3xl border border-white/15 bg-black/30 p-3.5 backdrop-blur-md transition-all duration-500 hover:-translate-y-1 hover:border-white/25 hover:bg-black/40 sm:p-9"
+                className="group relative flex min-h-[280px] flex-col justify-between overflow-hidden rounded-3xl border border-white/15 bg-black/30 p-6 backdrop-blur-md transition-all duration-500 hover:-translate-y-1 hover:border-emerald-200/30 hover:bg-black/40 sm:min-h-[310px] sm:p-9"
               >
-                {/* Número */}
-                <span className="pointer-events-none absolute right-2 top-0.5 text-5xl font-medium tracking-[-0.08em] text-white/[0.06] transition-all duration-500 group-hover:text-white/[0.09] sm:right-9 sm:top-4 sm:text-9xl">
+                {/* NÚMERO DECORATIVO */}
+                <span className="pointer-events-none absolute -right-1 -top-7 text-8xl font-medium tracking-[-0.09em] text-white/[0.045] transition-colors duration-500 group-hover:text-white/[0.08] sm:right-5 sm:top-0 sm:text-[150px]">
                   {option.number}
                 </span>
 
                 <div className="relative">
-                  {/* Ícone */}
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-white/[0.08] transition-all duration-500 group-hover:border-white/25 group-hover:bg-white/[0.12] sm:h-12 sm:w-12">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/15 bg-white/[0.06] transition-colors duration-500 group-hover:border-emerald-200/30 group-hover:bg-emerald-300/[0.08]">
                     <Icon
-                      size={15}
-                      strokeWidth={1.8}
-                      className="text-white/90 sm:size-5"
+                      size={21}
+                      strokeWidth={1.6}
+                      className="text-emerald-200"
                     />
                   </div>
 
-                  {/* Título */}
-                  <h3 className="mt-3 text-[15px] font-medium leading-tight tracking-tight text-white sm:mt-9 sm:text-3xl">
+                  <h3 className="mt-7 text-2xl font-medium tracking-tight text-white sm:text-3xl">
                     {option.title}
                   </h3>
 
-                  {/* Descrição */}
-                  <p className="mt-2 text-[10px] leading-[1.45] text-white/65 sm:mt-4 sm:max-w-lg sm:text-base sm:leading-7">
+                  <p className="mt-4 max-w-lg text-sm leading-7 text-white/65 sm:text-base">
                     {option.description}
                   </p>
+                </div>
 
-                  {/* Detalhe + seta */}
-                  <div className="mt-3 flex items-end justify-between gap-1.5 border-t border-white/10 pt-3 sm:mt-8 sm:pt-6">
-                    <span className="text-[7px] font-medium uppercase leading-3 tracking-[0.08em] text-white/55 sm:text-xs sm:tracking-[0.16em]">
-                      {option.detail}
-                    </span>
+                <div className="relative mt-8 flex items-center justify-between gap-4 border-t border-white/10 pt-5">
+                  <span className="text-xs font-medium uppercase leading-5 tracking-[0.12em] text-white/55 sm:text-sm sm:tracking-[0.15em]">
+                    {option.detail}
+                  </span>
 
-                    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/[0.05] text-white/65 transition-all duration-500 group-hover:border-white/30 group-hover:bg-white group-hover:text-black sm:h-10 sm:w-10">
-                      <ArrowRight
-                        size={12}
-                        strokeWidth={1.8}
-                        className="transition-transform duration-500 group-hover:translate-x-0.5 sm:size-[17px]"
-                      />
-                    </div>
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white/70 transition-all duration-300 group-hover:border-white group-hover:bg-white group-hover:text-black">
+                    <ArrowRight
+                      size={17}
+                      className="transition-transform duration-300 group-hover:translate-x-0.5"
+                    />
                   </div>
                 </div>
-              </a>
+              </motion.a>
             );
           })}
-        </div>
+        </motion.div>
+
+        {/* HORÁRIOS */}
+        <motion.div
+          className="mt-6 overflow-hidden rounded-3xl border border-white/15 bg-[#050a0b]/65 backdrop-blur-xl sm:mt-8"
+          variants={revealVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+        >
+          <div className="grid lg:grid-cols-[0.8fr_1.2fr]">
+            {/* INTRODUÇÃO DOS HORÁRIOS */}
+            <div className="relative overflow-hidden border-b border-white/10 p-6 sm:p-8 lg:border-b-0 lg:border-r lg:p-10">
+              <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-emerald-400/[0.08] blur-3xl" />
+
+              <div className="relative">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-emerald-300/20 bg-emerald-300/[0.08]">
+                  <Clock3
+                    size={21}
+                    strokeWidth={1.6}
+                    className="text-emerald-200"
+                  />
+                </div>
+
+                <p className="mt-6 text-xs font-medium uppercase tracking-[0.24em] text-emerald-200/75">
+                  Funcionamento
+                </p>
+
+                <h3 className="mt-3 text-2xl font-medium leading-tight tracking-tight text-white sm:text-3xl">
+                  Consulte os horários da sua próxima partida.
+                </h3>
+
+                <p className="mt-4 max-w-sm text-sm leading-7 text-white/55">
+                  A disponibilidade pode variar conforme o dia e o tipo de locação.
+                </p>
+              </div>
+            </div>
+
+            {/* LISTA DE DIAS */}
+            <motion.div
+              className="p-5 sm:p-8 lg:p-10"
+              variants={staggerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.15 }}
+            >
+              <div className="grid sm:grid-cols-2 sm:gap-x-8">
+                {schedule.map((item) => (
+                  <motion.div
+                    key={item.day}
+                    variants={revealVariants}
+                    className="flex min-h-[66px] flex-col justify-center gap-1.5 border-b border-white/[0.08] py-3 sm:min-h-[76px]"
+                  >
+                    <span className="text-sm font-medium text-white/85">
+                      {item.day}
+                    </span>
+
+                    <span className="text-xs text-white/45">
+                      {item.hours}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+
+              <p className="mt-5 text-xs leading-5 text-white/40">
+                Consulte a equipe para confirmar os horários disponíveis para sua partida.
+              </p>
+            </motion.div>
+          </div>
+        </motion.div>
 
         {/* CTA */}
-        <div className="mt-3 flex flex-col gap-4 rounded-3xl border border-white/15 bg-black/30 p-5 backdrop-blur-md sm:mt-5 sm:gap-6 sm:p-9 md:flex-row md:items-center md:justify-between">
+        <motion.div
+          className="mt-5 flex flex-col gap-6 rounded-3xl border border-white/15 bg-white/[0.045] p-6 backdrop-blur-xl sm:mt-6 sm:flex-row sm:items-center sm:justify-between sm:p-9"
+          variants={revealVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           <div>
-            <p className="text-base font-medium text-white sm:text-lg">
+            <p className="text-lg font-medium text-white sm:text-xl">
               Já sabe quando quer jogar?
             </p>
 
-            <p className="mt-1 text-xs text-white/65 sm:text-sm">
+            <p className="mt-2 text-sm leading-6 text-white/60">
               Consulte os horários disponíveis e agende sua quadra.
             </p>
           </div>
@@ -167,7 +292,7 @@ export default function Booking() {
             href={generalWhatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex w-full shrink-0 items-center justify-center gap-3 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-black transition-all duration-300 hover:bg-white/90 sm:w-auto"
+            className="group flex w-full shrink-0 items-center justify-center gap-3 rounded-full bg-white px-7 py-4 text-sm font-semibold text-black transition-colors duration-300 hover:bg-emerald-100 sm:w-auto"
           >
             Agendar horário
 
@@ -176,7 +301,7 @@ export default function Booking() {
               className="transition-transform duration-300 group-hover:translate-x-1"
             />
           </a>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

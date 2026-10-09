@@ -1,5 +1,13 @@
+"use client";
+
 import Image from "next/image";
-import { ArrowRight, CalendarDays, MapPin, Navigation } from "lucide-react";
+import {
+  ArrowRight,
+  CalendarDays,
+  MapPin,
+  Navigation,
+} from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 
 const whatsappUrl =
   "https://wa.me/5511974670706?text=" +
@@ -7,21 +15,40 @@ const whatsappUrl =
     "Olá! Gostaria de agendar um horário para jogar no Paulínia Sports Club. Poderiam me passar as opções de horários disponíveis?"
   );
 
-const mapsUrl =
-  "https://www.google.com/maps/place/paulinia+sport+club/data=!4m2!3m1!1s0x94c8bf1df3a9b969:0xbc27b699af87c5d8?sa=X&ved=1t:242&ictx=111";
+const clubAddress =
+  "Av. Dr. Heitor Nascimento, 809, Paulínia - SP, 13140-262";
 
+// Link direto para a ficha do Paulínia Sports Club no Google Maps
+const mapsUrl =
+  "https://www.google.com/maps/place/Paul%C3%ADnia+Sports+Club/@-22.769574,-47.1462332,17z/data=!4m10!1m2!2m1!1sPaul%C3%ADnia+Sports+Club,+Av.+Dr.+Heitor+Nascimento,+809,+Paul%C3%ADnia+-+SP,+13140-262!3m6!1s0x94c8bf1df3a9b969:0xbc27b699af87c5d8!8m2!3d-22.769574!4d-47.1417271!15sClBQYXVsw61uaWEgU3BvcnRzIENsdWIsIEF2LiBEci4gSGVpdG9yIE5hc2NpbWVudG8sIDgwOSwgUGF1bMOtbmlhIC0gU1AsIDEzMTQwLTI2MpIBDHNvY2Nlcl9maWVsZOABAA!16s%2Fg%2F11fb134p62?entry=ttu&g_ep=EgoyMDI2MTAwNi4wIKXMDSoASAFQAw%3D%3D";
+
+// Mapa incorporado com a localização exata
 const mapsEmbedUrl =
-  "https://www.google.com/maps?q=Paul%C3%ADnia%20Sport%20Club&output=embed";
+  "https://maps.google.com/maps?q=-22.769574,-47.1417271&z=17&output=embed";
 
 export default function FinalCTA() {
+  const shouldReduceMotion = useReducedMotion();
+
+  const reveal = {
+    hidden: shouldReduceMotion
+      ? { opacity: 1 }
+      : { opacity: 0, y: 24 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.75,
+        ease: [0.22, 1, 0.36, 1] as const,
+      },
+    },
+  };
+
   return (
     <section
       id="contato"
       className="relative overflow-hidden bg-[#050817] py-24 sm:py-32 lg:py-40"
     >
-      {/* =========================
-          BACKGROUND
-      ========================== */}
+      {/* BACKGROUND */}
       <div className="absolute inset-0">
         <Image
           src="/images/home/hero/hero-1.webp"
@@ -37,13 +64,11 @@ export default function FinalCTA() {
 
         <div className="absolute inset-0 bg-gradient-to-b from-[#050817]/70 via-transparent to-[#050817]/95" />
 
-        {/* Luz verde esquerda */}
+        {/* Luzes de fundo */}
         <div className="absolute -left-[15%] top-[10%] h-[600px] w-[600px] rounded-full bg-emerald-500/[0.14] blur-[170px]" />
 
-        {/* Luz verde direita */}
         <div className="absolute -right-[12%] top-[30%] h-[650px] w-[650px] rounded-full bg-green-500/[0.12] blur-[180px]" />
 
-        {/* Luz central */}
         <div className="absolute left-1/2 top-[45%] h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-emerald-400/[0.07] blur-[180px]" />
 
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,rgba(0,0,0,0.30)_100%)]" />
@@ -53,39 +78,59 @@ export default function FinalCTA() {
         <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#050817] via-[#050817]/45 to-transparent" />
       </div>
 
-      {/* =========================
-          CONTENT
-      ========================== */}
+      {/* CONTENT */}
       <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
         <div className="grid items-center gap-12 lg:grid-cols-[1fr_0.9fr] lg:gap-16">
-          {/* =========================
-              LEFT
-          ========================== */}
-          <div className="max-w-3xl">
-            {/* LABEL */}
-            <div className="mb-7 flex items-center gap-3">
+          {/* LEFT */}
+          <motion.div
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: shouldReduceMotion ? 0 : 0.12,
+                },
+              },
+            }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            className="max-w-3xl"
+          >
+            <motion.div
+              variants={reveal}
+              className="mb-7 flex items-center gap-3"
+            >
               <span className="h-px w-10 bg-emerald-300/80" />
 
               <span className="text-xs font-medium uppercase tracking-[0.3em] text-emerald-200/80">
                 Paulínia Sports Club
               </span>
-            </div>
+            </motion.div>
 
-            {/* TITLE */}
-            <h2 className="max-w-3xl text-5xl font-medium leading-[0.98] tracking-[-0.045em] text-white sm:text-6xl lg:text-7xl xl:text-8xl">
-              Seu próximo jogo
+            <motion.h2
+              variants={reveal}
+              className="max-w-3xl text-5xl font-medium leading-[0.98] tracking-[-0.045em] text-white sm:text-6xl lg:text-7xl xl:text-8xl"
+            >
+              Seu time já tem dia.
               <br />
-              <span className="text-white/55">começa aqui.</span>
-            </h2>
+              <span className="text-white/55">
+                Só falta a quadra.
+              </span>
+            </motion.h2>
 
-            {/* DESCRIPTION */}
-            <p className="mt-7 max-w-2xl text-base leading-7 text-white/70 sm:text-lg sm:leading-8">
+            <motion.p
+              variants={reveal}
+              className="mt-7 max-w-2xl text-base leading-7 text-white/70 sm:text-lg sm:leading-8"
+            >
               Escolha seu horário, reúna seu time e venha viver a experiência
               do Paulínia Sports Club.
-            </p>
+            </motion.p>
 
             {/* BUTTONS */}
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <motion.div
+              variants={reveal}
+              className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center"
+            >
               <a
                 href={whatsappUrl}
                 target="_blank"
@@ -103,26 +148,34 @@ export default function FinalCTA() {
               </a>
 
               <a
-                href="/escolinha"
+                href="/escola-spfc"
                 className="flex w-full items-center justify-center rounded-full border border-white/20 bg-white/[0.08] px-7 py-4 text-sm font-medium text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/[0.12] sm:w-auto"
               >
                 Conhecer a Escola Oficial SPFC
               </a>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
-          {/* =========================
-              MAP
-          ========================== */}
-          <div className="relative">
+          {/* MAP */}
+          <motion.div
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{
+              duration: shouldReduceMotion ? 0 : 0.9,
+              delay: shouldReduceMotion ? 0 : 0.2,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="relative"
+          >
             <div className="overflow-hidden rounded-[30px] border border-white/15 bg-black/30 p-2 shadow-[0_30px_100px_rgba(0,0,0,0.40)] backdrop-blur-md">
               {/* MAP HEADER */}
-              <div className="flex items-center justify-between px-3 py-3.5 sm:px-5 sm:py-4">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full border border-emerald-300/20 bg-emerald-400/10 sm:h-10 sm:w-10">
+              <div className="flex items-start justify-between px-3 py-3.5 sm:px-5 sm:py-4">
+                <div className="flex items-start gap-3">
+                  <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-emerald-300/20 bg-emerald-400/10 sm:h-10 sm:w-10">
                     <MapPin
-                      size={17}
-                      className="text-emerald-300 sm:size-[18px]"
+                      size={18}
+                      className="text-emerald-300"
                       strokeWidth={1.8}
                     />
                   </div>
@@ -132,8 +185,8 @@ export default function FinalCTA() {
                       Paulínia Sports Club
                     </p>
 
-                    <p className="mt-0.5 text-xs text-white/45">
-                      Localização
+                    <p className="mt-1 max-w-xs text-xs leading-5 text-white/50">
+                      {clubAddress}
                     </p>
                   </div>
                 </div>
@@ -143,7 +196,7 @@ export default function FinalCTA() {
               <div className="relative overflow-hidden rounded-[22px]">
                 <iframe
                   src={mapsEmbedUrl}
-                  title="Localização do Paulínia Sports Club"
+                  title="Localização do Paulínia Sports Club em Paulínia"
                   width="100%"
                   height="390"
                   style={{ border: 0 }}
@@ -152,13 +205,11 @@ export default function FinalCTA() {
                   className="block h-[250px] w-full grayscale-[0.15] contrast-[1.05] sm:h-[390px]"
                 />
 
-                {/* FADE */}
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/45 to-transparent sm:h-24" />
               </div>
 
-              {/* MAP BUTTON */}
+              {/* MAP FOOTER */}
               <div className="px-3 py-3.5 sm:flex sm:items-center sm:justify-between sm:gap-4 sm:px-4 sm:py-4">
-                {/* TEXTO */}
                 <div className="mb-2.5 flex items-center gap-2 text-[11px] text-white/45 sm:mb-0 sm:text-xs">
                   <Navigation
                     size={13}
@@ -169,7 +220,6 @@ export default function FinalCTA() {
                   <span>Encontre o clube</span>
                 </div>
 
-                {/* BOTÃO */}
                 <a
                   href={mapsUrl}
                   target="_blank"
@@ -185,7 +235,7 @@ export default function FinalCTA() {
                 </a>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

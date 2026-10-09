@@ -2,15 +2,34 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { motion, useReducedMotion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 
 const whatsappUrl =
   "https://wa.me/5519999812525?text=" +
   encodeURIComponent(
-    "Olá! Tenho interesse em agendar uma aula na Escola Oficial São Paulo FC em Paulínia. Poderiam me passar mais informações?"
+    "Olá! Tenho interesse em agendar uma aula experimental na Escola Oficial São Paulo FC em Paulínia. Poderiam me passar os horários disponíveis e mais informações?"
   );
 
 export default function Hero() {
+  const shouldReduceMotion = useReducedMotion();
+
+  const reveal = {
+    hidden: {
+      opacity: 0,
+      y: shouldReduceMotion ? 0 : 24,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+    },
+  };
+
+  const transition = {
+    duration: shouldReduceMotion ? 0 : 0.8,
+    ease: [0.22, 1, 0.36, 1] as const,
+  };
+
   return (
     <section
       id="inicio"
@@ -51,38 +70,72 @@ export default function Hero() {
         <div className="mx-auto w-full max-w-7xl px-6 pb-28 pt-32 sm:px-8 lg:px-10">
           <div className="max-w-4xl">
             {/* IDENTIFICAÇÃO */}
-            <div className="mb-7 flex items-center gap-3">
+            <motion.div
+              variants={reveal}
+              initial="hidden"
+              animate="visible"
+              transition={{
+                ...transition,
+                delay: shouldReduceMotion ? 0 : 0.15,
+              }}
+              className="mb-7 flex items-center gap-3"
+            >
               <span className="h-px w-10 bg-red-600" />
 
               <p className="text-xs font-semibold uppercase tracking-[0.28em] text-red-400">
                 Escola Oficial São Paulo FC
               </p>
-            </div>
+            </motion.div>
 
             {/* TÍTULO */}
-            <h1 className="max-w-4xl text-5xl font-semibold leading-[0.92] tracking-[-0.045em] text-white sm:text-6xl md:text-7xl lg:text-[88px]">
-              Formando atletas.
+            <motion.h1
+              variants={reveal}
+              initial="hidden"
+              animate="visible"
+              transition={{
+                ...transition,
+                delay: shouldReduceMotion ? 0 : 0.3,
+              }}
+              className="max-w-4xl text-5xl font-semibold leading-[0.92] tracking-[-0.045em] text-white sm:text-6xl md:text-7xl lg:text-[88px]"
+            >
+              Aqui Não é
               <br />
-              <span className="text-white/65">
-                Formando histórias.
-              </span>
-            </h1>
+              <span className="text-white/65">Escolinha.</span>
+            </motion.h1>
 
             {/* TEXTO */}
-            <p className="mt-7 max-w-xl text-base leading-7 text-white/70 sm:text-lg">
-              Futebol, formação e experiências que acompanham cada etapa
-              da jornada de jovens atletas dos 4 aos 16 anos.
-            </p>
+            <motion.p
+              variants={reveal}
+              initial="hidden"
+              animate="visible"
+              transition={{
+                ...transition,
+                delay: shouldReduceMotion ? 0 : 0.45,
+              }}
+              className="mt-7 max-w-xl text-base leading-7 text-white/70 sm:text-lg"
+            >
+              Dos 4 aos 16 anos, seu filho treina com a metodologia do São
+              Paulo FC e compete de verdade.
+            </motion.p>
 
             {/* CTA */}
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <motion.div
+              variants={reveal}
+              initial="hidden"
+              animate="visible"
+              transition={{
+                ...transition,
+                delay: shouldReduceMotion ? 0 : 0.6,
+              }}
+              className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center"
+            >
               <a
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center justify-center gap-3 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-black shadow-[0_10px_40px_rgba(0,0,0,0.25)] transition-all duration-300 hover:bg-white/90"
               >
-                Agendar aula
+                Agendar aula experimental
 
                 <ArrowRight
                   size={17}
@@ -96,7 +149,7 @@ export default function Hero() {
               >
                 Conhecer a escola
               </Link>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

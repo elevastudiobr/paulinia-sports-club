@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 
 const whatsappUrl =
   "https://wa.me/5519999812525?text=" +
@@ -10,6 +13,32 @@ const whatsappUrl =
 const instagramUrl = "https://www.instagram.com/spfcpaulinia/";
 
 export default function FinalCTA() {
+  const shouldReduceMotion = useReducedMotion();
+
+  const revealVariants = {
+    hidden: {
+      opacity: 0,
+      y: shouldReduceMotion ? 0 : 24,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.7,
+        ease: [0.22, 1, 0.36, 1] as const,
+      },
+    },
+  };
+
+  const staggerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: shouldReduceMotion ? 0 : 0.14,
+      },
+    },
+  };
+
   return (
     <section
       id="contato"
@@ -46,34 +75,50 @@ export default function FinalCTA() {
 
       {/* CONTEÚDO */}
       <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
-        <div className="max-w-3xl">
+        <motion.div
+          className="max-w-3xl"
+          variants={staggerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+        >
           {/* EYEBROW */}
-          <div className="mb-6 flex items-center gap-3">
+          <motion.div
+            variants={revealVariants}
+            className="mb-6 flex items-center gap-3"
+          >
             <span className="h-px w-10 bg-red-600" />
 
             <span className="text-xs font-semibold uppercase tracking-[0.28em] text-red-400">
               Escola Oficial São Paulo FC
             </span>
-          </div>
+          </motion.div>
 
           {/* TÍTULO */}
-          <h2 className="text-4xl font-semibold leading-[0.98] tracking-[-0.045em] text-white sm:text-5xl md:text-6xl lg:text-7xl">
-            O próximo capítulo
+          <motion.h2
+            variants={revealVariants}
+            className="text-4xl font-semibold leading-[0.98] tracking-[-0.045em] text-white sm:text-5xl md:text-6xl lg:text-7xl"
+          >
+            A primeira aula é por nossa conta.
             <br />
-            <span className="text-white/55">
-              começa dentro de campo.
-            </span>
-          </h2>
+            <span className="text-white/55">Venha ver de perto.</span>
+          </motion.h2>
 
           {/* TEXTO */}
-          <p className="mt-7 max-w-xl text-base leading-7 text-white/65 sm:text-lg">
+          <motion.p
+            variants={revealVariants}
+            className="mt-7 max-w-xl text-base leading-7 text-white/65 sm:text-lg"
+          >
             Faça parte da Escola Oficial São Paulo FC em Paulínia e descubra
             uma experiência de futebol pensada para acompanhar cada etapa da
             formação.
-          </p>
+          </motion.p>
 
           {/* BOTÕES */}
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <motion.div
+            variants={revealVariants}
+            className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center"
+          >
             <a
               href={whatsappUrl}
               target="_blank"
@@ -118,18 +163,13 @@ export default function FinalCTA() {
                   strokeWidth="1.8"
                 />
 
-                <circle
-                  cx="17.5"
-                  cy="6.5"
-                  r="1"
-                  fill="currentColor"
-                />
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
               </svg>
 
               Conheça nosso Instagram
             </a>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
 
       {/* GLOW FINAL */}
