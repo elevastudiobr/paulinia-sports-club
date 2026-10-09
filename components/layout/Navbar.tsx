@@ -53,7 +53,7 @@ export default function Navbar() {
   const goToHome = () => {
     setMenuOpen(false);
 
-    if (window.location.pathname !== "/") {
+    if (isSchoolPage) {
       window.location.href = "/";
       return;
     }
@@ -67,7 +67,7 @@ export default function Navbar() {
   const goToSection = (id: string) => {
     setMenuOpen(false);
 
-    if (window.location.pathname !== "/") {
+    if (isSchoolPage) {
       window.location.href = `/#${id}`;
       return;
     }
@@ -85,7 +85,7 @@ export default function Navbar() {
   const goToSchool = () => {
     setMenuOpen(false);
 
-    if (window.location.pathname === "/escola-spfc") {
+    if (isSchoolPage) {
       window.scrollTo({
         top: 0,
         behavior: "smooth",
@@ -111,28 +111,61 @@ export default function Navbar() {
           <button
             type="button"
             onClick={goToHome}
-            aria-label="Voltar para o início"
+            aria-label={
+              isSchoolPage
+                ? "Voltar para o início"
+                : "Voltar para o início"
+            }
             className="flex shrink-0 items-center"
           >
-            <div className="relative h-[52px] w-[58px] sm:h-16 sm:w-[72px]">
-              <Image
-                src="/images/logo.webp"
-                alt="Paulínia Sports Club"
-                fill
-                priority
-                className="object-contain"
-              />
-            </div>
+            {isSchoolPage ? (
+              <>
+                {/* LOGO SÃO PAULO FC */}
+                <div className="relative h-[46px] w-[48px] sm:h-[54px] sm:w-[56px]">
+                  <Image
+                    src="/images/logo-spfc.webp"
+                    alt="São Paulo FC"
+                    fill
+                    priority
+                    className="object-contain"
+                  />
+                </div>
 
-            <div className="relative ml-0 hidden h-11 w-52 sm:ml-1 sm:block sm:h-12 sm:w-60">
-              <Image
-                src="/images/logo-text.webp"
-                alt="Paulínia Sports Club"
-                fill
-                priority
-                className="object-contain object-left"
-              />
-            </div>
+                {/* TEXTO ESCOLA OFICIAL SPFC */}
+                <div className="relative ml-2 h-[42px] w-[130px] sm:ml-2 sm:h-12 sm:w-[155px]">
+                  <Image
+                    src="/images/logo-spfc-text.webp"
+                    alt="Escola Oficial SPFC"
+                    fill
+                    priority
+                    className="object-contain object-left"
+                  />
+                </div>
+              </>
+            ) : (
+              <>
+                {/* LOGO PAULÍNIA SPORTS CLUB */}
+                <div className="relative h-[52px] w-[58px] sm:h-16 sm:w-[72px]">
+                  <Image
+                    src="/images/logo.webp"
+                    alt="Paulínia Sports Club"
+                    fill
+                    priority
+                    className="object-contain"
+                  />
+                </div>
+
+                <div className="relative ml-0 hidden h-11 w-52 sm:ml-1 sm:block sm:h-12 sm:w-60">
+                  <Image
+                    src="/images/logo-text.webp"
+                    alt="Paulínia Sports Club"
+                    fill
+                    priority
+                    className="object-contain object-left"
+                  />
+                </div>
+              </>
+            )}
           </button>
 
           {/* DESKTOP */}

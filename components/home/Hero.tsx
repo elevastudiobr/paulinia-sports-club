@@ -15,10 +15,6 @@ const slides = [
     image: "/images/home/hero/hero-2.webp",
     alt: "Espaço do Paulínia Sports Club",
   },
-  {
-    image: "/images/home/hero/hero-3.webp",
-    alt: "Quadra do Paulínia Sports Club",
-  },
 ];
 
 const whatsappUrl =
@@ -120,9 +116,7 @@ export default function Hero() {
             >
               Quantos golaços seus
               <br />
-              <span className="text-white/75">
-                ficaram sem prova?
-              </span>
+              <span className="text-white/75">ficaram sem prova?</span>
             </motion.h1>
 
             {/* Description */}
