@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowRight, CalendarDays, Repeat2, Clock3 } from "lucide-react";
+import { ArrowRight, CalendarDays, Repeat2 } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 
 const options = [
@@ -25,16 +25,6 @@ const options = [
     whatsappMessage:
       "Olá! Tenho interesse na locação mensal de uma quadra no Paulínia Sports Club. Gostaria de saber como funcionam os horários fixos e quais opções estão disponíveis.",
   },
-];
-
-const schedule = [
-  { day: "Segunda-feira", hours: "Consultar disponibilidade" },
-  { day: "Terça-feira", hours: "Consultar disponibilidade" },
-  { day: "Quarta-feira", hours: "Consultar disponibilidade" },
-  { day: "Quinta-feira", hours: "Consultar disponibilidade" },
-  { day: "Sexta-feira", hours: "Consultar disponibilidade" },
-  { day: "Sábado", hours: "Consultar disponibilidade" },
-  { day: "Domingo", hours: "Consultar disponibilidade" },
 ];
 
 const generalWhatsappMessage =
@@ -199,75 +189,6 @@ export default function Booking() {
               </motion.a>
             );
           })}
-        </motion.div>
-
-        {/* HORÁRIOS */}
-        <motion.div
-          className="mt-6 overflow-hidden rounded-3xl border border-white/15 bg-[#050a0b]/65 backdrop-blur-xl sm:mt-8"
-          variants={revealVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
-        >
-          <div className="grid lg:grid-cols-[0.8fr_1.2fr]">
-            {/* INTRODUÇÃO DOS HORÁRIOS */}
-            <div className="relative overflow-hidden border-b border-white/10 p-6 sm:p-8 lg:border-b-0 lg:border-r lg:p-10">
-              <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-emerald-400/[0.08] blur-3xl" />
-
-              <div className="relative">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-emerald-300/20 bg-emerald-300/[0.08]">
-                  <Clock3
-                    size={21}
-                    strokeWidth={1.6}
-                    className="text-emerald-200"
-                  />
-                </div>
-
-                <p className="mt-6 text-xs font-medium uppercase tracking-[0.24em] text-emerald-200/75">
-                  Funcionamento
-                </p>
-
-                <h3 className="mt-3 text-2xl font-medium leading-tight tracking-tight text-white sm:text-3xl">
-                  Consulte os horários da sua próxima partida.
-                </h3>
-
-                <p className="mt-4 max-w-sm text-sm leading-7 text-white/55">
-                  A disponibilidade pode variar conforme o dia e o tipo de locação.
-                </p>
-              </div>
-            </div>
-
-            {/* LISTA DE DIAS */}
-            <motion.div
-              className="p-5 sm:p-8 lg:p-10"
-              variants={staggerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.15 }}
-            >
-              <div className="grid sm:grid-cols-2 sm:gap-x-8">
-                {schedule.map((item) => (
-                  <motion.div
-                    key={item.day}
-                    variants={revealVariants}
-                    className="flex min-h-[66px] flex-col justify-center gap-1.5 border-b border-white/[0.08] py-3 sm:min-h-[76px]"
-                  >
-                    <span className="text-sm font-medium text-white/85">
-                      {item.day}
-                    </span>
-
-                    <span className="text-xs text-white/45">
-                      {item.hours}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
-
-              <p className="mt-5 text-xs leading-5 text-white/40">
-                Consulte a equipe para confirmar os horários disponíveis para sua partida.
-              </p>
-            </motion.div>
-          </div>
         </motion.div>
 
         {/* CTA */}

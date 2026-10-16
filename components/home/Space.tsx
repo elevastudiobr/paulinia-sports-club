@@ -5,7 +5,6 @@ import {
   ArrowRight,
   CalendarDays,
   MapPin,
-  Ruler,
   ShieldCheck,
   Trees,
 } from "lucide-react";
@@ -28,24 +27,27 @@ const courts = [
     image: "/images/home/quadras/quadra-1.webp",
     alt: "Quadras do Paulínia Sports Club",
     label: "05 quadras",
-    title: "Espaço para sua partida",
-    description: "Consulte as dimensões e o tipo de piso.",
-    type: "Estrutura completa",
+    title: "Nenhuma desculpa pra faltar no jogo",
+    description:
+      "Espaço de sobra pra reunir o time e transformar qualquer dia em dia de jogo.",
+    type: "Nossa estrutura",
   },
   {
     image: "/images/home/quadras/quadra-2.webp",
-    alt: "Quadra descoberta do Paulínia Sports Club",
+    alt: "Quadras descobertas do Paulínia Sports Club",
     label: "04 descobertas",
-    title: "Jogue com seu time",
-    description: "Consulte as dimensões e o tipo de piso.",
+    title: "O jogo acontece aqui",
+    description:
+      "Chame os amigos, monte seu time e aproveite cada partida ao ar livre.",
     type: "Quadras descobertas",
   },
   {
     image: "/images/home/quadras/quadra-3.webp",
     alt: "Quadra coberta do Paulínia Sports Club",
     label: "01 coberta",
-    title: "Uma opção coberta",
-    description: "Consulte as dimensões e o tipo de piso.",
+    title: "A partida não para",
+    description:
+      "Uma opção coberta pra você reunir o time e manter a bola rolando.",
     type: "Quadra coberta",
   },
 ];
@@ -94,8 +96,6 @@ function Reveal({
 }
 
 export default function Space() {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
     <section
       id="espaco"
@@ -186,10 +186,6 @@ export default function Space() {
                     <p className="text-[10px] uppercase tracking-[0.2em] text-white/60">
                       {court.label}
                     </p>
-
-                    <h3 className="mt-2 text-2xl font-medium tracking-tight">
-                      {court.title}
-                    </h3>
                   </div>
                 </div>
 
@@ -197,17 +193,6 @@ export default function Space() {
                   <p className="text-sm leading-6 text-white/55">
                     {court.description}
                   </p>
-
-                  <div className="mt-5 flex items-center justify-between border-t border-white/10 pt-4">
-                    <div className="flex items-center gap-2 text-xs text-white/65">
-                      <Ruler size={15} className="text-emerald-300" />
-                      Piso e medidas
-                    </div>
-
-                    <span className="text-[10px] uppercase tracking-wider text-white/35">
-                      A confirmar
-                    </span>
-                  </div>
                 </div>
               </article>
             </Reveal>

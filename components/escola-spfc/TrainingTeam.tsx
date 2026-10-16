@@ -12,10 +12,8 @@ import {
   ChevronDown,
   ChevronUp,
   Clock3,
-  GraduationCap,
   ShieldCheck,
   Target,
-  Users,
   UsersRound,
 } from "lucide-react";
 
@@ -26,41 +24,29 @@ const trainingDetails = [
     number: "01",
     title: "Categorias por idade",
     description:
-      "Treinamentos organizados de acordo com a etapa de desenvolvimento de cada atleta.",
+      "Turmas organizadas de acordo com o ano de nascimento de cada atleta.",
     details: [
       {
-        name: "Sub-5",
-        description: "Primeiros contatos com o futebol e atividades lúdicas.",
+        name: "Baby Foot",
+        description: "Nascidos em 2020, 2021 e 2022, conforme a turma.",
       },
       {
-        name: "Sub-7",
+        name: "Nascidos de 2015 a 2019",
         description:
-          "Coordenação motora, familiarização com a bola e fundamentos.",
+          "Turmas para diferentes etapas de desenvolvimento técnico e motor.",
       },
       {
-        name: "Sub-9",
+        name: "Nascidos de 2010 a 2014",
         description:
-          "Desenvolvimento técnico e introdução à dinâmica do jogo.",
+          "Treinamentos voltados ao aprimoramento técnico e à compreensão do jogo.",
       },
       {
-        name: "Sub-11",
-        description: "Aprimoramento dos fundamentos e tomada de decisão.",
-      },
-      {
-        name: "Sub-13",
-        description: "Evolução técnica, tática e compreensão coletiva.",
-      },
-      {
-        name: "Sub-15",
-        description: "Aprofundamento tático e desenvolvimento competitivo.",
-      },
-      {
-        name: "Sub-17",
-        description:
-          "Preparação esportiva e evolução individual e coletiva.",
+        name: "Turma feminina",
+        description: "Treinamento feminino aos sábados.",
       },
     ],
-    note: "Categorias ilustrativas. Consulte a escola para confirmar as turmas disponíveis.",
+    note:
+      "Confira os horários para identificar a turma correspondente ao ano de nascimento.",
   },
   {
     id: "schedule",
@@ -68,16 +54,40 @@ const trainingDetails = [
     number: "02",
     title: "Dias e horários",
     description:
-      "Uma rotina de treinamentos pensada para integrar o esporte ao dia a dia dos alunos.",
+      "Consulte os horários de treinamento por período, dias da semana e ano de nascimento.",
     details: [
-      { name: "Segunda-feira", description: "Horários a consultar." },
-      { name: "Terça-feira", description: "Horários a consultar." },
-      { name: "Quarta-feira", description: "Horários a consultar." },
-      { name: "Quinta-feira", description: "Horários a consultar." },
-      { name: "Sexta-feira", description: "Horários a consultar." },
-      { name: "Sábado", description: "Horários a consultar." },
+      {
+        name: "Manhã · Segunda, quarta e sexta",
+        description:
+          "08h às 09h30 — nascidos de 2015 a 2019.\n09h às 10h30 — nascidos de 2010 a 2014.",
+      },
+      {
+        name: "Tarde · Segunda, quarta e sexta",
+        description:
+          "14h às 15h30 — nascidos de 2012 a 2015.\n15h30 às 17h — nascidos de 2016 a 2019.\n17h às 18h30 — nascidos de 2010 a 2015.",
+      },
+      {
+        name: "Noite · Segunda, quarta e sexta",
+        description:
+          "18h30 às 19h45 — nascidos de 2016 a 2019.\n19h45 às 21h — nascidos de 2011 a 2015.",
+      },
+      {
+        name: "Noite · Terça e sexta",
+        description: "18h30 às 19h30 — nascidos de 2017 a 2019.",
+      },
+      {
+        name: "Baby Foot · Terça e quinta",
+        description:
+          "17h30 às 18h45 — nascidos em 2021 e 2022.\n18h45 às 20h — nascidos em 2020 e 2021.",
+      },
+      {
+        name: "Sábado",
+        description:
+          "08h às 09h30 — nascidos de 2015 a 2019.\n09h30 às 11h — nascidos de 2010 a 2014.\n11h às 12h30 — turma feminina.",
+      },
     ],
-    note: "Consulte a escola para verificar os dias, horários e a disponibilidade de cada categoria.",
+    note:
+      "Os horários estão organizados por dia e faixa etária para facilitar a identificação da turma.",
   },
   {
     id: "development",
@@ -103,7 +113,8 @@ const trainingDetails = [
           "Estímulo à confiança, à dedicação e ao desenvolvimento de cada atleta.",
       },
     ],
-    note: "As atividades são adaptadas à faixa etária e à etapa de desenvolvimento dos alunos.",
+    note:
+      "As atividades são adaptadas à faixa etária e à etapa de desenvolvimento dos alunos.",
   },
 ];
 
@@ -128,27 +139,6 @@ const methodology = [
     title: "Disciplina e equipe",
     description:
       "Incentivo ao respeito, à responsabilidade, à cooperação e ao espírito coletivo.",
-  },
-];
-
-const professionals = [
-  {
-    number: "01",
-    role: "Comissão técnica",
-    description:
-      "Conheça os profissionais envolvidos na orientação dos treinamentos.",
-  },
-  {
-    number: "02",
-    role: "Treinamento em campo",
-    description:
-      "Acompanhamento das atividades e do desenvolvimento dos atletas.",
-  },
-  {
-    number: "03",
-    role: "Formação esportiva",
-    description:
-      "Incentivo ao aprendizado, à disciplina e à evolução dentro e fora de campo.",
   },
 ];
 
@@ -196,7 +186,6 @@ export default function TrainingTeam() {
       id="treinamentos"
       className="relative isolate overflow-hidden bg-[#10050B] text-white"
     >
-      {/* IMAGEM DE FUNDO */}
       <div className="pointer-events-none absolute inset-0 -z-20">
         <Image
           src="/images/escolinha/training/training.webp"
@@ -207,7 +196,6 @@ export default function TrainingTeam() {
         />
       </div>
 
-      {/* IMAGEM MAIS CLARA E ATMOSFERA AVERMELHADA */}
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[#16040A]/35" />
 
       <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-[#10040A]/65 via-[#17040B]/25 to-[#10040A]/45" />
@@ -219,7 +207,6 @@ export default function TrainingTeam() {
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_bottom_left,rgba(150,10,35,0.22),transparent_45%)]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-5 py-10 sm:px-8 sm:py-14 lg:px-12 lg:py-16">
-        {/* CABEÇALHO */}
         <motion.div
           initial={revealInitial}
           whileInView="visible"
@@ -250,7 +237,6 @@ export default function TrainingTeam() {
           <div className="mt-5 h-px w-20 bg-gradient-to-r from-red-500 to-transparent" />
         </motion.div>
 
-        {/* CARDS EXPANSÍVEIS */}
         <motion.div
           initial={revealInitial}
           whileInView="visible"
@@ -360,10 +346,10 @@ export default function TrainingTeam() {
                           />
 
                           <div>
-                            <h4 className="text-sm font-medium text-white/90">
+                            <h4 className="whitespace-pre-line text-sm font-medium text-white/90">
                               {detail.name}
                             </h4>
-                            <p className="mt-1 text-xs leading-5 text-white/65">
+                            <p className="mt-1 whitespace-pre-line text-xs leading-5 text-white/65">
                               {detail.description}
                             </p>
                           </div>
@@ -380,95 +366,6 @@ export default function TrainingTeam() {
             );
           })}
         </motion.div>
-
-        {/* PROFISSIONAIS */}
-        <div className="mt-12 sm:mt-14">
-          <motion.div
-            initial={revealInitial}
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={reveal}
-            transition={revealTransition}
-            className="mb-6 flex flex-col justify-between gap-4 sm:mb-8 sm:flex-row sm:items-end"
-          >
-            <div className="max-w-2xl">
-              <span className="text-xs font-semibold uppercase tracking-[0.22em] text-red-300">
-                Quem acompanha sua evolução
-              </span>
-
-              <h3 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
-                Profissionais que fazem a diferença.
-              </h3>
-
-              <p className="mt-3 max-w-xl text-sm leading-6 text-white/75 sm:text-base">
-                Conheça a equipe que participa da formação e do desenvolvimento
-                dos nossos atletas.
-              </p>
-            </div>
-
-            <div className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/15 bg-red-500/10 text-red-200 sm:flex">
-              <Users size={19} strokeWidth={1.5} />
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={revealInitial}
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.12 }}
-            variants={{
-              hidden: {},
-              visible: {
-                transition: {
-                  staggerChildren: shouldReduceMotion ? 0 : 0.14,
-                },
-              },
-            }}
-            className="grid gap-4 md:grid-cols-3"
-          >
-            {professionals.map((professional) => (
-              <motion.article
-                key={professional.number}
-                variants={reveal}
-                transition={revealTransition}
-                className="group overflow-hidden rounded-2xl border border-white/10 bg-[#100811]/75 backdrop-blur-xl transition-all duration-300 hover:border-red-400/35"
-              >
-                <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-gradient-to-br from-[#35101D] via-[#1A0B17] to-[#100811]">
-                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(220,25,50,0.2),transparent_65%)]" />
-
-                  <div className="relative flex h-16 w-16 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white/45 transition-all duration-300 group-hover:border-red-400/40 group-hover:text-red-300">
-                    <UsersRound size={30} strokeWidth={1.2} />
-                  </div>
-
-                  <span className="absolute left-4 top-4 text-xs tracking-[0.2em] text-white/45">
-                    {professional.number}
-                  </span>
-
-                  <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#100811] to-transparent" />
-                </div>
-
-                <div className="px-5 pb-5 pt-1 sm:px-6 sm:pb-6">
-                  <div className="mb-3 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-red-300">
-                    <span className="h-px w-5 bg-red-500" />
-                    Equipe técnica
-                  </div>
-
-                  <h4 className="text-lg font-semibold tracking-tight">
-                    {professional.role}
-                  </h4>
-
-                  <p className="mt-2 text-sm leading-6 text-white/65">
-                    {professional.description}
-                  </p>
-
-                  <div className="mt-4 flex items-center gap-2 border-t border-white/10 pt-3 text-xs text-white/50">
-                    <Award size={14} />
-                    <span>Formação e acompanhamento esportivo</span>
-                  </div>
-                </div>
-              </motion.article>
-            ))}
-          </motion.div>
-        </div>
 
         {/* METODOLOGIA */}
         <div className="mt-12 border-t border-white/10 pt-10 sm:mt-14 sm:pt-12">

@@ -149,7 +149,7 @@ export default function FinalCTA() {
 
               <a
                 href="/escola-spfc"
-                className="flex w-full items-center justify-center rounded-full border border-white/20 bg-white/[0.08] px-7 py-4 text-sm font-medium text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/[0.12] sm:w-auto"
+                className="flex w-full items-center justify-center rounded-full border border-red-500/35 bg-red-600/[0.08] px-7 py-3.5 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-red-500/60 hover:bg-red-600/[0.14] sm:w-auto"
               >
                 Conhecer a Escola Oficial SPFC
               </a>

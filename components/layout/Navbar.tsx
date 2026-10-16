@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { CalendarDays, Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -107,66 +108,128 @@ export default function Navbar() {
       >
         {/* BARRA PRINCIPAL */}
         <div className="mx-auto flex h-[68px] max-w-7xl items-center justify-between px-4 sm:h-[76px] sm:px-8 lg:px-10">
-          {/* LOGO */}
-          <button
-            type="button"
-            onClick={goToHome}
-            aria-label={
-              isSchoolPage
-                ? "Voltar para o início"
-                : "Voltar para o início"
-            }
-            className="flex shrink-0 items-center"
-          >
+          {/* LOGOS */}
+          <div className="flex shrink-0 items-center">
             {isSchoolPage ? (
               <>
-                {/* LOGO SÃO PAULO FC */}
-                <div className="relative h-[46px] w-[48px] sm:h-[54px] sm:w-[56px]">
-                  <Image
-                    src="/images/logo-spfc.webp"
-                    alt="São Paulo FC"
-                    fill
-                    priority
-                    className="object-contain"
-                  />
+                {/* LOGOS PAULÍNIA SPORTS CLUB + SÃO PAULO FC — MOBILE */}
+                <div className="flex items-center lg:hidden">
+                  <button
+                    type="button"
+                    onClick={goToHome}
+                    aria-label="Voltar para o início do Paulínia Sports Club"
+                    className="flex shrink-0 items-center"
+                  >
+                    <div className="relative h-[56px] w-[58px]">
+                      <Image
+                        src="/images/logo.webp"
+                        alt="Paulínia Sports Club"
+                        fill
+                        priority
+                        sizes="58px"
+                        className="object-contain"
+                      />
+                    </div>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={goToSchool}
+                    aria-label="Ir para a Escola Oficial São Paulo FC"
+                    className="ml-1 flex shrink-0 items-center justify-center transition-transform duration-200 hover:scale-105"
+                  >
+                    <div className="relative h-[50px] w-[54px]">
+                      <Image
+                        src="/images/logo-spfc-nav.webp"
+                        alt="Escola Oficial São Paulo FC"
+                        fill
+                        priority
+                        sizes="54px"
+                        className="object-contain"
+                      />
+                    </div>
+                  </button>
                 </div>
 
-                {/* TEXTO ESCOLA OFICIAL SPFC */}
-                <div className="relative ml-2 h-[42px] w-[130px] sm:ml-2 sm:h-12 sm:w-[155px]">
-                  <Image
-                    src="/images/logo-spfc-text.webp"
-                    alt="Escola Oficial SPFC"
-                    fill
-                    priority
-                    className="object-contain object-left"
-                  />
-                </div>
+                {/* LOGO E NOME DA ESCOLA — DESKTOP */}
+                <button
+                  type="button"
+                  onClick={goToHome}
+                  aria-label="Voltar para o início da escola"
+                  className="hidden shrink-0 items-center lg:flex"
+                >
+                  <div className="relative h-[54px] w-[56px]">
+                    <Image
+                      src="/images/logo-spfc.webp"
+                      alt="São Paulo FC"
+                      fill
+                      priority
+                      className="object-contain"
+                    />
+                  </div>
+
+                  <div className="relative ml-2 h-12 w-[155px]">
+                    <Image
+                      src="/images/logo-spfc-text.webp"
+                      alt="Escola Oficial SPFC"
+                      fill
+                      priority
+                      className="object-contain object-left"
+                    />
+                  </div>
+                </button>
               </>
             ) : (
               <>
                 {/* LOGO PAULÍNIA SPORTS CLUB */}
-                <div className="relative h-[52px] w-[58px] sm:h-16 sm:w-[72px]">
-                  <Image
-                    src="/images/logo.webp"
-                    alt="Paulínia Sports Club"
-                    fill
-                    priority
-                    className="object-contain"
-                  />
-                </div>
+                <button
+                  type="button"
+                  onClick={goToHome}
+                  aria-label="Voltar para o início"
+                  className="flex shrink-0 items-center"
+                >
+                  <div className="relative h-[56px] w-[62px] sm:h-16 sm:w-[72px]">
+                    <Image
+                      src="/images/logo.webp"
+                      alt="Paulínia Sports Club"
+                      fill
+                      priority
+                      className="object-contain"
+                    />
+                  </div>
 
-                <div className="relative ml-0 hidden h-11 w-52 sm:ml-1 sm:block sm:h-12 sm:w-60">
-                  <Image
-                    src="/images/logo-text.webp"
-                    alt="Paulínia Sports Club"
-                    fill
-                    priority
-                    className="object-contain object-left"
-                  />
-                </div>
+                  <div className="relative ml-0 hidden h-11 w-52 sm:ml-1 sm:block sm:h-12 sm:w-60">
+                    <Image
+                      src="/images/logo-text.webp"
+                      alt="Paulínia Sports Club"
+                      fill
+                      priority
+                      className="object-contain object-left"
+                    />
+                  </div>
+                </button>
+
+                {/* LOGO SPFC — SOMENTE MOBILE */}
+                <button
+                  type="button"
+                  onClick={goToSchool}
+                  aria-label="Ir para a Escola Oficial São Paulo FC"
+                  className="ml-2 flex shrink-0 items-center justify-center transition-transform duration-200 hover:scale-105 lg:hidden"
+                >
+                  <div className="relative h-[56px] w-[62px]">
+                    <Image
+                      src="/images/logo-spfc-nav.webp"
+                      alt="Escola Oficial São Paulo FC"
+                      fill
+                      priority
+                      sizes="62px"
+                      className="object-contain"
+                    />
+                  </div>
+                </button>
               </>
             )}
-          </button>
+          </div>
 
           {/* DESKTOP */}
           <div className="hidden items-center lg:flex">
@@ -210,7 +273,7 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* MOBILE */}
+          {/* MOBILE MENU */}
           <div className="flex items-center lg:hidden">
             <button
               type="button"

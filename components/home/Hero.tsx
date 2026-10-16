@@ -163,7 +163,7 @@ export default function Hero() {
 
               <Link
                 href="/escola-spfc"
-                className="flex items-center justify-center rounded-full border border-white/25 bg-white/[0.06] px-7 py-3.5 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:border-white/40 hover:bg-white/10"
+                className="flex items-center justify-center rounded-full border border-red-500/35 bg-red-600/[0.08] px-7 py-3.5 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:border-red-500/60 hover:bg-red-600/[0.14]"
               >
                 Conhecer a Escola Oficial SPFC
               </Link>
