@@ -275,19 +275,19 @@ export default function Gallery() {
 
         <div className="absolute inset-x-0 top-0 h-[440px] bg-gradient-to-b from-[#f1f5f1] via-[#d1dfd4]/70 via-[#809b89]/35 to-transparent" />
 
-        <div className="absolute inset-x-0 top-0 h-[560px] bg-gradient-to-b from-transparent via-[#365442]/18 to-[#07100b]/10" />
+        <div className="absolute inset-x-0 top-0 h-[560px] bg-gradient-to-b from-transparent via-[#142D72]/18 to-[#07100b]/10" />
 
         <div className="absolute inset-0 bg-gradient-to-r from-[#07100b]/75 via-[#07100b]/40 to-[#07100b]/15" />
 
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#07100b]/15 to-[#07100b]/90" />
 
-        <div className="absolute -left-[15%] -top-[10%] h-[650px] w-[650px] rounded-full bg-emerald-400/[0.16] blur-[180px]" />
+        <div className="absolute -left-[15%] -top-[10%] h-[650px] w-[650px] rounded-full bg-[#244ED8]/[0.16] blur-[180px]" />
 
-        <div className="absolute -right-[12%] top-[8%] h-[700px] w-[700px] rounded-full bg-green-500/[0.14] blur-[190px]" />
+        <div className="absolute -right-[12%] top-[8%] h-[700px] w-[700px] rounded-full bg-[#142D72]/[0.14] blur-[190px]" />
 
-        <div className="absolute left-[30%] top-[30%] h-[650px] w-[700px] rounded-full bg-emerald-400/[0.09] blur-[190px]" />
+        <div className="absolute left-[30%] top-[30%] h-[650px] w-[700px] rounded-full bg-[#244ED8]/[0.09] blur-[190px]" />
 
-        <div className="absolute -bottom-[25%] left-[5%] h-[650px] w-[900px] rounded-full bg-emerald-500/[0.10] blur-[210px]" />
+        <div className="absolute -bottom-[25%] left-[5%] h-[650px] w-[900px] rounded-full bg-[#244ED8]/[0.10] blur-[210px]" />
 
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_12%,rgba(0,0,0,0.20)_100%)]" />
 

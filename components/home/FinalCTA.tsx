@@ -65,11 +65,11 @@ export default function FinalCTA() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#050817]/70 via-transparent to-[#050817]/95" />
 
         {/* Luzes de fundo */}
-        <div className="absolute -left-[15%] top-[10%] h-[600px] w-[600px] rounded-full bg-emerald-500/[0.14] blur-[170px]" />
+        <div className="absolute -left-[15%] top-[10%] h-[600px] w-[600px] rounded-full bg-[#244ED8]/[0.14] blur-[170px]" />
 
-        <div className="absolute -right-[12%] top-[30%] h-[650px] w-[650px] rounded-full bg-green-500/[0.12] blur-[180px]" />
+        <div className="absolute -right-[12%] top-[30%] h-[650px] w-[650px] rounded-full bg-[#142D72]/[0.12] blur-[180px]" />
 
-        <div className="absolute left-1/2 top-[45%] h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-emerald-400/[0.07] blur-[180px]" />
+        <div className="absolute left-1/2 top-[45%] h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-[#244ED8]/[0.07] blur-[180px]" />
 
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,rgba(0,0,0,0.30)_100%)]" />
 

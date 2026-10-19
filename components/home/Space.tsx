@@ -115,7 +115,7 @@ export default function Space() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#03050b]/65 via-[#03050b]/70 to-[#03050b]" />
 
         <div className="absolute -left-40 top-40 h-[420px] w-[420px] rounded-full bg-blue-500/[0.08] blur-[150px]" />
-        <div className="absolute -right-40 top-[45%] h-[480px] w-[480px] rounded-full bg-emerald-400/[0.06] blur-[160px]" />
+        <div className="absolute -right-40 top-[45%] h-[480px] w-[480px] rounded-full bg-[#142D72]/[0.06] blur-[160px]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">

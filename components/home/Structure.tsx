@@ -117,26 +117,26 @@ export default function Structure() {
 
         <div className="absolute inset-0 bg-black/25" />
 
-        {/* GRADIENTE VERDE — TOPO */}
-        <div className="absolute inset-x-0 top-0 h-[420px] bg-gradient-to-b from-[#0d3825] via-[#164d32]/65 to-transparent" />
+        {/* GRADIENTE AZUL — TOPO */}
+        <div className="absolute inset-x-0 top-0 h-[420px] bg-gradient-to-b from-[#142D72] via-[#142D72]/65 to-transparent" />
 
-        <div className="absolute inset-x-0 top-0 h-[650px] bg-gradient-to-b from-[#0d3825]/55 via-[#0b2d1b]/20 to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-[650px] bg-gradient-to-b from-[#142D72]/55 via-[#142D72]/20 to-transparent" />
 
-        <div className="absolute inset-0 bg-gradient-to-r from-[#06150c]/55 via-transparent to-[#06150c]/50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#06102a]/55 via-transparent to-[#06102a]/50" />
 
         {/* GRADIENTE INFERIOR */}
         <div className="absolute inset-x-0 bottom-0 h-[420px] bg-gradient-to-t from-[#07100b] via-[#07100b]/55 to-transparent" />
 
-        {/* BRILHOS VERDES */}
-        <div className="pointer-events-none absolute -left-[15%] top-[5%] h-[600px] w-[600px] rounded-full bg-emerald-500/[0.16] blur-[170px]" />
+        {/* BRILHOS AZUIS */}
+        <div className="pointer-events-none absolute -left-[15%] top-[5%] h-[600px] w-[600px] rounded-full bg-[#244ED8]/[0.16] blur-[170px]" />
 
-        <div className="pointer-events-none absolute -right-[15%] top-[18%] h-[650px] w-[650px] rounded-full bg-green-500/[0.12] blur-[180px]" />
+        <div className="pointer-events-none absolute -right-[15%] top-[18%] h-[650px] w-[650px] rounded-full bg-[#142D72]/[0.12] blur-[180px]" />
 
-        <div className="pointer-events-none absolute left-[28%] top-[35%] h-[600px] w-[700px] rounded-full bg-emerald-400/[0.07] blur-[180px]" />
+        <div className="pointer-events-none absolute left-[28%] top-[35%] h-[600px] w-[700px] rounded-full bg-[#244ED8]/[0.07] blur-[180px]" />
 
-        <div className="pointer-events-none absolute -left-[15%] bottom-[-10%] h-[600px] w-[600px] rounded-full bg-emerald-600/[0.14] blur-[170px]" />
+        <div className="pointer-events-none absolute -left-[15%] bottom-[-10%] h-[600px] w-[600px] rounded-full bg-[#142D72]/[0.14] blur-[170px]" />
 
-        <div className="pointer-events-none absolute -right-[10%] bottom-[-5%] h-[650px] w-[650px] rounded-full bg-green-500/[0.12] blur-[175px]" />
+        <div className="pointer-events-none absolute -right-[10%] bottom-[-5%] h-[650px] w-[650px] rounded-full bg-[#142D72]/[0.12] blur-[175px]" />
 
         {/* VINHETA */}
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,rgba(2,8,5,0.38)_100%)]" />
@@ -174,10 +174,7 @@ export default function Structure() {
           {features
             .filter((feature) => feature.large)
             .map((feature, index) => (
-              <Reveal
-                key={feature.number}
-                delay={index * 0.12}
-              >
+              <Reveal key={feature.number} delay={index * 0.12}>
                 <div className="group relative min-h-[230px] overflow-hidden rounded-3xl border border-white/15 bg-[#10261b]/70 shadow-[0_25px_80px_rgba(0,0,0,0.30)] backdrop-blur-sm transition-all duration-700 hover:-translate-y-1 hover:border-white/25 hover:shadow-[0_30px_90px_rgba(0,0,0,0.40)] sm:min-h-[530px] sm:rounded-[30px]">
                   <div className="absolute inset-0">
                     <Image
@@ -222,10 +219,7 @@ export default function Structure() {
           {features
             .filter((feature) => !feature.large)
             .map((feature, index) => (
-              <Reveal
-                key={feature.number}
-                delay={index * 0.09}
-              >
+              <Reveal key={feature.number} delay={index * 0.09}>
                 <div className="group relative min-h-[170px] overflow-hidden rounded-3xl border border-white/15 bg-[#10261b]/70 shadow-[0_20px_60px_rgba(0,0,0,0.25)] backdrop-blur-sm transition-all duration-700 hover:-translate-y-1 hover:border-white/25 hover:shadow-[0_25px_70px_rgba(0,0,0,0.35)] sm:min-h-[370px] sm:rounded-[28px]">
                   <div className="absolute inset-0">
                     <Image
@@ -277,9 +271,9 @@ export default function Structure() {
       </div>
 
       {/* TRANSIÇÃO FINAL */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-[280px] bg-gradient-to-b from-transparent via-[#102c1c]/25 to-[#07100b]" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-[280px] bg-gradient-to-b from-transparent via-[#142D72]/25 to-[#07100b]" />
 
-      <div className="pointer-events-none absolute bottom-[-100px] left-1/2 z-20 h-[400px] w-[900px] -translate-x-1/2 rounded-full bg-emerald-900/[0.18] blur-[150px]" />
+      <div className="pointer-events-none absolute bottom-[-100px] left-1/2 z-20 h-[400px] w-[900px] -translate-x-1/2 rounded-full bg-[#142D72]/[0.18] blur-[150px]" />
     </section>
   );
 }

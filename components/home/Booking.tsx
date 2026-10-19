@@ -81,9 +81,11 @@ export default function Booking() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#03050b]/90 via-[#03050b]/65 to-[#03050b]/35" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#03050b]/40 via-[#03050b]/35 to-[#03050b]/90" />
 
-        <div className="absolute inset-x-0 bottom-0 h-[420px] bg-gradient-to-b from-transparent via-[#0a2d1e]/30 to-[#0d3825]/90" />
+        {/* TRANSIÇÃO AZUL MAIS ESCURA */}
+        <div className="absolute inset-x-0 bottom-0 h-[420px] bg-gradient-to-b from-transparent via-[#10245C]/30 to-[#10245C]/90" />
 
-        <div className="absolute -bottom-48 left-1/2 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-emerald-500/[0.07] blur-[160px]" />
+        {/* BRILHO AZUL MAIS ESCURO */}
+        <div className="absolute -bottom-48 left-1/2 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-[#142D72]/[0.07] blur-[160px]" />
       </div>
 
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
