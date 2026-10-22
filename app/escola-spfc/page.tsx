@@ -1,7 +1,9 @@
+
 import type { Metadata } from "next";
 
 import Hero from "@/components/escola-spfc/Hero";
 import About from "@/components/escola-spfc/About";
+import Benefits from "@/components/escola-spfc/Benefits";
 import TrainingTeam from "@/components/escola-spfc/TrainingTeam";
 import Gallery from "@/components/escola-spfc/Gallery";
 import FinalCTA from "@/components/escola-spfc/FinalCTA";
@@ -27,6 +29,7 @@ export default function EscolaSPFCPage() {
     <main className="bg-[#050817] text-white">
       <Hero />
       <About />
+      <Benefits />
       <TrainingTeam />
       <Gallery />
       <FinalCTA />
